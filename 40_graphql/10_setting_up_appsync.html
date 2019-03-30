@@ -14,7 +14,7 @@
 
     <link rel="shortcut icon" href="/amplify-photo-gallery-workshop/images/favicon.png" type="image/x-icon" />
 <link rel="icon" href="/amplify-photo-gallery-workshop/images/favicon.png" type="image/x-icon" />
-    <title>Amplify Web App Workshop :: Amplify / AppSync / React Workshop</title>
+    <title>Setting Up AppSync :: Amplify / AppSync / React Workshop</title>
 
     
     <link href="/amplify-photo-gallery-workshop/css/nucleus.css?1553948119" rel="stylesheet">
@@ -44,7 +44,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/amplify-photo-gallery-workshop/">
+  <body class="" data-url="/amplify-photo-gallery-workshop/40_graphql/10_setting_up_appsync.html">
     <nav id="sidebar" class="">
 
 
@@ -314,7 +314,7 @@
   
     
     <li data-nav-id="/amplify-photo-gallery-workshop/40_graphql.html" title="Creating a GraphQL API" class="dd-item 
-        
+        parent
         
         
         ">
@@ -338,7 +338,7 @@
  
   
     
-      <li data-nav-id="/amplify-photo-gallery-workshop/40_graphql/10_setting_up_appsync.html" title="Setting Up AppSync" class="dd-item ">
+      <li data-nav-id="/amplify-photo-gallery-workshop/40_graphql/10_setting_up_appsync.html" title="Setting Up AppSync" class="dd-item active">
         <a href="/amplify-photo-gallery-workshop/40_graphql/10_setting_up_appsync.html">
         Setting Up AppSync
         
@@ -893,35 +893,160 @@
         <div id="overlay"></div>
         <div class="padding highlightable">
               
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fa fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fa fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/amplify-photo-gallery-workshop/'>Amplify Web App Workshop</a> > <a href='/amplify-photo-gallery-workshop/40_graphql.html'>Creating a GraphQL API</a> > Setting Up AppSync
+          
+        
+          
+        
+          
+        
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#adding-an-aws-appsync-api">Adding an AWS AppSync API</a></li>
+<li><a href="#declaring-the-graphql-schema">Declaring the GraphQL Schema</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
 
         
-          <div id="chapter">
-        
         <div id="body-inner">
+          
+            <h1>Setting Up AppSync</h1>
           
 
         
 
-<span id="sidebar-toggle-span">
-<a href="#" id="sidebar-toggle" data-sidebar-toggle=""><i class="fa fa-bars"></i> navigation</a>
-</span>
-
- 
 
 
-<h2 id="aws-amplify와-aws-appsync로-br-사진-공유-웹-어플리케이션-구현">AWS Amplify와 AWS AppSync로  <br/> 사진 공유 웹 어플리케이션 구현</h2>
 
-<p><br></p>
+<p>Now that we have authenticated users, let&rsquo;s make an API for creating albums. These albums won&rsquo;t have any photos in them just yet, just a name and an association with the username that created them, but it&rsquo;s another clear step toward putting our app together.</p>
 
-<h3 id="환영합니다">환영합니다!</h3>
+<div class="notices info" >
+To build our API we'll use [AWS AppSync](https://aws.amazon.com/appsync/), a managed GraphQL service for building data-driven apps. If you're not yet familiar with the basics of GraphQL, you should take a few minutes and check out [https://graphql.github.io/learn/](https://graphql.github.io/learn/) before continuing, or use the site to refer back to when you have questions as you read along.
+</div>
 
-<p style='text-align: left;'>
-    이번 워크샵에서 React를 사용하여 사용자들이 사진을 업로드하고 공유하는 data-driven 기반의 안전한 사진 갤러리 웹 어플리케이션을 구현합니다. AWS AppSync를 이용하여 Amazon DynamoDB에 백업된 데이터를 GraphQL API를 통하여 빠르게 가져오고 실행합니다. AWS Amplify 라이브러리를 사용하여 사용자를 인증하고, API와 통신하며, 사진 업로드 관리를 어떻게 하는지 시연합니다. 마지막으로 Amazon Rekognition으로 AI 기반 오브젝트 태그를 추가하여 사용자가 수동으로 검색 데이터 입력하지 않아도 사진을 찾아주도록 구현합니다.
-</p>
+<p><img src="/images/appsync-logo.png" alt="AWS AppSync: Rapid prototyping and development with GraphQL" /></p>
+
+<h3 id="adding-an-aws-appsync-api">Adding an AWS AppSync API</h3>
+
+<p><strong>From the photo-albums directory, run</strong> <code>amplify add api</code> and respond to the prompts like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">$ amplify add api 
+
+? Please select from one of the below mentioned services
+GraphQL
+
+? Provide API name:
+photoalbums
+
+? Choose an authorization type for the API
+Amazon Cognito User Pool
+
+? Do you have an annotated GraphQL schema? 
+No
+
+? Do you want a guided schema creation? 
+Yes
+
+? What best describes your project: 
+One-to-many relationship (e.g., “Blogs” with “Posts” and “Comments”)
+
+? Do you want to edit the schema now? 
+Yes
+
+Please manually edit the file created at /home/ec2-user/environment/photo-albums/amplify/backend/api/photoalbums/schema.graphql
+
+? Press enter to continue </code></pre></div>
+<h3 id="declaring-the-graphql-schema">Declaring the GraphQL Schema</h3>
+
+<p>Below is a schema that will suit our needs for storing and querying Albums and Photos.</p>
+
+<ol>
+<li><p><strong>Paste this into photo-albums/amplify/backend/api/photoalbums/schema.graphql</strong>, replacing the example schema content. Remember to save the file. Note: in Cloud9 you can mouse-over the file name in the terminal, click it, and select &lsquo;Open&rsquo;.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-graphql" data-lang="graphql"><span style="color:#75715e"># amplify/backend/api/photo-albums/schema.graphql</span>
+
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Album</span> <span style="color:#a6e22e">@model</span> <span style="color:#a6e22e">@auth</span>(rules: [{<span style="color:#a6e22e">allow</span>: <span style="color:#a6e22e">owner</span>}]) {
+    id: <span style="color:#a6e22e">ID</span>!
+    name: <span style="color:#a6e22e">String</span>!
+    photos: [<span style="color:#a6e22e">Photo</span>] <span style="color:#a6e22e">@connection</span>(name: <span style="color:#e6db74">&#34;AlbumPhotos&#34;</span>)
+}
+
+<span style="color:#a6e22e">type</span> Photo <span style="color:#a6e22e">@model</span> <span style="color:#a6e22e">@auth</span>(rules: [{<span style="color:#a6e22e">allow</span>: <span style="color:#a6e22e">owner</span>}]) {
+    id: <span style="color:#a6e22e">ID</span>!
+    album: <span style="color:#a6e22e">Album</span> <span style="color:#a6e22e">@connection</span>(name: <span style="color:#e6db74">&#34;AlbumPhotos&#34;</span>)
+    <span style="color:#a6e22e">bucket</span>: <span style="color:#a6e22e">String</span>!
+    fullsize: <span style="color:#a6e22e">PhotoS3Info</span>!
+    thumbnail: <span style="color:#a6e22e">PhotoS3Info</span>!
+}
+
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">PhotoS3Info</span> {
+    key: <span style="color:#a6e22e">String</span>!
+    width: <span style="color:#a6e22e">Int</span>!
+    height: <span style="color:#a6e22e">Int</span>!
+}</code></pre></div></li>
+
+<li><p>Return to your command prompt and <strong>press Enter once</strong> to continue</p></li>
+
+<li><p><strong>Run</strong> <code>amplify push</code> and confirm you&rsquo;d like to continue with the updates</p></li>
+
+<li><p>When prompted about code generation, <strong>select &lsquo;No&rsquo;</strong></p></li>
+
+<li><p>Wait a few minutes while Amplify takes care of provisioning new resources for us.</p></li>
+</ol>
+
+<div class="notices info" >
+At this point, without having to write any code, we now have a GraphQL API that will let us perform CRUDL operations on our Album and Photo data types!
+<br/><br/>
+But don't worry, the way AWS AppSync is resolving fields into data isn't hidden from us. Each resolver that was automatically generated is available for us to edit as we see fit, and we'll get to that later. For now, let's try out adding some albums and then retrieving them all as a list.
+</div>
+
+
+<footer class=" footline" >
 	
-  
-        
-            </div> 
+</footer>
+
+
         
         </div> 
         
@@ -1129,6 +1254,202 @@
             
                 
                     
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
                 
                 
 
@@ -1287,198 +1608,6 @@
             
         
                     
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
             
         
         
@@ -1486,10 +1615,10 @@
 
 
         
-            <a class="nav nav-prev" href="/amplify-photo-gallery-workshop/140_bonus/20_album_membership.html" title="Allowing Other Users To Collaborate In Albums"> <i class="fa fa-chevron-left"></i></a>
+            <a class="nav nav-prev" href="/amplify-photo-gallery-workshop/40_graphql.html" title="Creating a GraphQL API"> <i class="fa fa-chevron-left"></i></a>
         
         
-            <a class="nav nav-next" href="/amplify-photo-gallery-workshop/10_%EC%82%AC%EC%A0%84%EC%A4%80%EB%B9%84.html" title="사전준비" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+            <a class="nav nav-next" href="/amplify-photo-gallery-workshop/40_graphql/20_trying_out_queries.html" title="Trying Out Some Queries" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
         
     </div>
 

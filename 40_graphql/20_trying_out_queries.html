@@ -14,7 +14,7 @@
 
     <link rel="shortcut icon" href="/amplify-photo-gallery-workshop/images/favicon.png" type="image/x-icon" />
 <link rel="icon" href="/amplify-photo-gallery-workshop/images/favicon.png" type="image/x-icon" />
-    <title>Amplify Web App Workshop :: Amplify / AppSync / React Workshop</title>
+    <title>Trying Out Some Queries :: Amplify / AppSync / React Workshop</title>
 
     
     <link href="/amplify-photo-gallery-workshop/css/nucleus.css?1553948119" rel="stylesheet">
@@ -44,7 +44,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/amplify-photo-gallery-workshop/">
+  <body class="" data-url="/amplify-photo-gallery-workshop/40_graphql/20_trying_out_queries.html">
     <nav id="sidebar" class="">
 
 
@@ -314,7 +314,7 @@
   
     
     <li data-nav-id="/amplify-photo-gallery-workshop/40_graphql.html" title="Creating a GraphQL API" class="dd-item 
-        
+        parent
         
         
         ">
@@ -357,7 +357,7 @@
  
   
     
-      <li data-nav-id="/amplify-photo-gallery-workshop/40_graphql/20_trying_out_queries.html" title="Trying Out Some Queries" class="dd-item ">
+      <li data-nav-id="/amplify-photo-gallery-workshop/40_graphql/20_trying_out_queries.html" title="Trying Out Some Queries" class="dd-item active">
         <a href="/amplify-photo-gallery-workshop/40_graphql/20_trying_out_queries.html">
         Trying Out Some Queries
         
@@ -893,35 +893,166 @@
         <div id="overlay"></div>
         <div class="padding highlightable">
               
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fa fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fa fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/amplify-photo-gallery-workshop/'>Amplify Web App Workshop</a> > <a href='/amplify-photo-gallery-workshop/40_graphql.html'>Creating a GraphQL API</a> > Trying Out Some Queries
+          
+        
+          
+        
+          
+        
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#authenticating-to-appsync">Authenticating to AppSync</a></li>
+<li><a href="#trying-out-some-queries">Trying out some queries</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
 
         
-          <div id="chapter">
-        
         <div id="body-inner">
+          
+            <h1>Trying Out Some Queries</h1>
           
 
         
 
-<span id="sidebar-toggle-span">
-<a href="#" id="sidebar-toggle" data-sidebar-toggle=""><i class="fa fa-bars"></i> navigation</a>
-</span>
-
- 
 
 
-<h2 id="aws-amplify와-aws-appsync로-br-사진-공유-웹-어플리케이션-구현">AWS Amplify와 AWS AppSync로  <br/> 사진 공유 웹 어플리케이션 구현</h2>
 
-<p><br></p>
+<p><strong>Open the AWS Console</strong> and <strong>click into the photoalbums API</strong>. Now we can start poking around with the API.</p>
 
-<h3 id="환영합니다">환영합니다!</h3>
+<div id="tabs">
+    <ul id="nav-tabs"></ul>
+    
+<div id="content-tab" link="us-east-1" title="North America">
+    <p>Link to <a href="https://console.aws.amazon.com/appsync/home?region=us-east-1#/apis" target="_blank">AWS AppSync web console in Northern Virgina</a></p>
 
-<p style='text-align: left;'>
-    이번 워크샵에서 React를 사용하여 사용자들이 사진을 업로드하고 공유하는 data-driven 기반의 안전한 사진 갤러리 웹 어플리케이션을 구현합니다. AWS AppSync를 이용하여 Amazon DynamoDB에 백업된 데이터를 GraphQL API를 통하여 빠르게 가져오고 실행합니다. AWS Amplify 라이브러리를 사용하여 사용자를 인증하고, API와 통신하며, 사진 업로드 관리를 어떻게 하는지 시연합니다. 마지막으로 Amazon Rekognition으로 AI 기반 오브젝트 태그를 추가하여 사용자가 수동으로 검색 데이터 입력하지 않아도 사진을 찾아주도록 구현합니다.
-</p>
+</div>
+
+<div id="content-tab" link="eu-west-1" title="Europe">
+    <p>Link to <a href="https://console.aws.amazon.com/appsync/home?region=eu-west-1#/apis" target="_blank">AWS AppSync web console in Ireland</a></p>
+
+</div>
+
+<p></div></p>
+
+<p><strong>Click Queries</strong> in the sidebar on the left.</p>
+
+<p><img src="/images/appsync_queries.png?classes=border" alt="appsync queries" /></p>
+
+<div class="notices info" >
+This area is AWS AppSync's interactive query explorer. We can write queries and mutations here, execute them, and see the results. It's a great way to test things out to make sure our resolvers are working the way we expect.
+</div>
+
+<h3 id="authenticating-to-appsync">Authenticating to AppSync</h3>
+
+<div class="notices warning" >
+Before we can issue queries, we'll need to authenticate (because our AppSync API is configured to authenticate users via the Amazon Cognito User Pool we set up when we configured the authentication for our app.
+</div>
+
+<ol>
+<li><p><strong>Click the Login with User Pools button</strong> at the top of the query editor.</p></li>
+
+<li><p>Look up the value for the <strong>ClientId</strong> field</p>
+
+<ol>
+<li>In Cloud9, <strong>open photo-albums/src/aws-exports.js</strong></li>
+<li><strong>Copy</strong> the value of the <strong>aws_user_pools_web_client_id</strong> property</li>
+</ol></li>
+
+<li><p><strong>Paste</strong> the value into the <strong>ClientId</strong> field</p></li>
+
+<li><p><strong>Enter your credentials</strong> for the user you created when we added authentication</p></li>
+
+<li><p><strong>Click Login</strong></p></li>
+</ol>
+
+<h3 id="trying-out-some-queries">Trying out some queries</h3>
+
+<p>You should now be able to try out the following mutations and queries. Press the orange &lsquo;play&rsquo; button to execute queries and mutations.</p>
+
+<p><strong>Add a new album</strong> by copy/pasting the following and running the query:</p>
+
+<pre><code>mutation {
+    createAlbum(input:{name:&quot;First Album&quot;}) {
+        id
+        name
+    }
+}
+</code></pre>
+
+<p><strong>Add another album</strong> by editing and re-running your createAlbum mutation with another album name:</p>
+
+<pre><code>mutation {
+    createAlbum(input:{name:&quot;Second Album&quot;}) {
+        id
+        name
+    }
+}
+</code></pre>
+
+<p><strong>List all albums</strong> by running this query:</p>
+
+<pre><code>query {
+    listAlbums {
+        items {
+            id
+            name
+        }
+    }
+}
+</code></pre>
+
+<p>As you can see, we&rsquo;re able to read and write data through GraphQL queries and mutations and AppSync takes care of reading and persisting data (in this case, to DynamoDB).</p>
+
+
+<footer class=" footline" >
 	
-  
-        
-            </div> 
+</footer>
+
+
         
         </div> 
         
@@ -1145,37 +1276,6 @@
             
                 
                     
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
                     
                 
                 
@@ -1196,165 +1296,8 @@
             
                 
                     
-                
-                
-
-                    
-                    
-                    
-
-                    
                         
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
                         
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
                     
                 
                 
@@ -1479,6 +1422,198 @@
             
         
                     
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
             
         
         
@@ -1486,10 +1621,10 @@
 
 
         
-            <a class="nav nav-prev" href="/amplify-photo-gallery-workshop/140_bonus/20_album_membership.html" title="Allowing Other Users To Collaborate In Albums"> <i class="fa fa-chevron-left"></i></a>
+            <a class="nav nav-prev" href="/amplify-photo-gallery-workshop/40_graphql/10_setting_up_appsync.html" title="Setting Up AppSync"> <i class="fa fa-chevron-left"></i></a>
         
         
-            <a class="nav nav-next" href="/amplify-photo-gallery-workshop/10_%EC%82%AC%EC%A0%84%EC%A4%80%EB%B9%84.html" title="사전준비" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+            <a class="nav nav-next" href="/amplify-photo-gallery-workshop/50_working_with_albums.html" title="Working With Albums" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
         
     </div>
 
@@ -1498,20 +1633,20 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/amplify-photo-gallery-workshop/js/clipboard.min.js?1553948119"></script>
-    <script src="/amplify-photo-gallery-workshop/js/perfect-scrollbar.min.js?1553948119"></script>
-    <script src="/amplify-photo-gallery-workshop/js/perfect-scrollbar.jquery.min.js?1553948119"></script>
-    <script src="/amplify-photo-gallery-workshop/js/jquery.sticky.js?1553948119"></script>
-    <script src="/amplify-photo-gallery-workshop/js/featherlight.min.js?1553948119"></script>
-    <script src="/amplify-photo-gallery-workshop/js/html5shiv-printshiv.min.js?1553948119"></script>
-    <script src="/amplify-photo-gallery-workshop/js/highlight.pack.js?1553948119"></script>
+    <script src="/amplify-photo-gallery-workshop/js/clipboard.min.js?1553948120"></script>
+    <script src="/amplify-photo-gallery-workshop/js/perfect-scrollbar.min.js?1553948120"></script>
+    <script src="/amplify-photo-gallery-workshop/js/perfect-scrollbar.jquery.min.js?1553948120"></script>
+    <script src="/amplify-photo-gallery-workshop/js/jquery.sticky.js?1553948120"></script>
+    <script src="/amplify-photo-gallery-workshop/js/featherlight.min.js?1553948120"></script>
+    <script src="/amplify-photo-gallery-workshop/js/html5shiv-printshiv.min.js?1553948120"></script>
+    <script src="/amplify-photo-gallery-workshop/js/highlight.pack.js?1553948120"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/amplify-photo-gallery-workshop/js/modernizr.custom.71422.js?1553948119"></script>
-    <script src="/amplify-photo-gallery-workshop/js/learn.js?1553948119"></script>
-    <script src="/amplify-photo-gallery-workshop/js/hugo-learn.js?1553948119"></script>
+    <script src="/amplify-photo-gallery-workshop/js/modernizr.custom.71422.js?1553948120"></script>
+    <script src="/amplify-photo-gallery-workshop/js/learn.js?1553948120"></script>
+    <script src="/amplify-photo-gallery-workshop/js/hugo-learn.js?1553948120"></script>
 
-    <link href="/amplify-photo-gallery-workshop/mermaid/mermaid.css?1553948119" type="text/css" rel="stylesheet" />
-    <script src="/amplify-photo-gallery-workshop/mermaid/mermaid.js?1553948119"></script>
+    <link href="/amplify-photo-gallery-workshop/mermaid/mermaid.css?1553948120" type="text/css" rel="stylesheet" />
+    <script src="/amplify-photo-gallery-workshop/mermaid/mermaid.js?1553948120"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

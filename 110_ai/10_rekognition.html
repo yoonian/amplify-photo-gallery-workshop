@@ -14,7 +14,7 @@
 
     <link rel="shortcut icon" href="/amplify-photo-gallery-workshop/images/favicon.png" type="image/x-icon" />
 <link rel="icon" href="/amplify-photo-gallery-workshop/images/favicon.png" type="image/x-icon" />
-    <title>Amplify Web App Workshop :: Amplify / AppSync / React Workshop</title>
+    <title>Integrating Amazon Rekognition :: Amplify / AppSync / React Workshop</title>
 
     
     <link href="/amplify-photo-gallery-workshop/css/nucleus.css?1553948119" rel="stylesheet">
@@ -44,7 +44,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/amplify-photo-gallery-workshop/">
+  <body class="" data-url="/amplify-photo-gallery-workshop/110_ai/10_rekognition.html">
     <nav id="sidebar" class="">
 
 
@@ -575,7 +575,7 @@
   
     
     <li data-nav-id="/amplify-photo-gallery-workshop/110_ai.html" title="Adding AI" class="dd-item 
-        
+        parent
         
         
         ">
@@ -599,7 +599,7 @@
  
   
     
-      <li data-nav-id="/amplify-photo-gallery-workshop/110_ai/10_rekognition.html" title="Integrating Amazon Rekognition" class="dd-item ">
+      <li data-nav-id="/amplify-photo-gallery-workshop/110_ai/10_rekognition.html" title="Integrating Amazon Rekognition" class="dd-item active">
         <a href="/amplify-photo-gallery-workshop/110_ai/10_rekognition.html">
         Integrating Amazon Rekognition
         
@@ -893,35 +893,264 @@
         <div id="overlay"></div>
         <div class="padding highlightable">
               
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fa fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fa fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/amplify-photo-gallery-workshop/'>Amplify Web App Workshop</a> > <a href='/amplify-photo-gallery-workshop/110_ai.html'>Adding AI</a> > Integrating Amazon Rekognition
+          
+        
+          
+        
+          
+        
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#integrating-rekognition-with-the-photo-processor-lambda">Integrating Rekognition with the Photo Processor Lambda</a></li>
+</ul></li>
+<li><a href="#what-we-changed">What we changed</a></li>
+<li><a href="#re-deploying-the-photo-processor-lambda">Re-deploying the Photo Processor Lambda</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
 
         
-          <div id="chapter">
-        
         <div id="body-inner">
+          
+            <h1>Integrating Amazon Rekognition</h1>
           
 
         
 
-<span id="sidebar-toggle-span">
-<a href="#" id="sidebar-toggle" data-sidebar-toggle=""><i class="fa fa-bars"></i> navigation</a>
-</span>
-
- 
 
 
-<h2 id="aws-amplify와-aws-appsync로-br-사진-공유-웹-어플리케이션-구현">AWS Amplify와 AWS AppSync로  <br/> 사진 공유 웹 어플리케이션 구현</h2>
 
-<p><br></p>
+<p>It would be great if we could find images without having to manually tag them with descriptions of their contents. Luckily, adding this feature is pretty easy thanks to <a href="https://aws.amazon.com/rekognition/image-features/" target="_blank">Amazon Rekognition</a>. We can use the <a href="https://docs.aws.amazon.com/rekognition/latest/dg/API_DetectLabels.html" target="_blank">DetectLabels API</a> &ndash; if we give it a photo, it will respond with a list of appropriate labels for the image. Perfect!</p>
 
-<h3 id="환영합니다">환영합니다!</h3>
+<div class="notices info" >
+**Amazon Rekognition's DetectLabels Quick Summary**
+<br/><br/>
+You pass the input image as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file.
+<br/><br/>
+For each object, scene, and concept the API returns one or more labels. Each label provides the object name, and the level of confidence that the image contains the object. For example, suppose the input image has a lighthouse, the sea, and a rock. The response includes all three labels, one for each object.
+<br/><br/>
+{Name: lighthouse, Confidence: 98.4629}
+<br/>
+{Name: rock,Confidence: 79.2097}
+<br/>
+{Name: sea,Confidence: 75.061}
+</div>
 
-<p style='text-align: left;'>
-    이번 워크샵에서 React를 사용하여 사용자들이 사진을 업로드하고 공유하는 data-driven 기반의 안전한 사진 갤러리 웹 어플리케이션을 구현합니다. AWS AppSync를 이용하여 Amazon DynamoDB에 백업된 데이터를 GraphQL API를 통하여 빠르게 가져오고 실행합니다. AWS Amplify 라이브러리를 사용하여 사용자를 인증하고, API와 통신하며, 사진 업로드 관리를 어떻게 하는지 시연합니다. 마지막으로 Amazon Rekognition으로 AI 기반 오브젝트 태그를 추가하여 사용자가 수동으로 검색 데이터 입력하지 않아도 사진을 찾아주도록 구현합니다.
-</p>
-	
-  
+<h4 id="integrating-rekognition-with-the-photo-processor-lambda">Integrating Rekognition with the Photo Processor Lambda</h4>
+
+<p>Let&rsquo;s add Amazon Rekognition integration in to our photo_processor lambda function.</p>
+
+<p><strong>Replace amplify/backend/function/workshopphotoprocessor/src/index.js</strong> with the following version:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// photo-albums/amplify/backend/function/workshopphotoprocessor/src/index.js
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">AWS</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;aws-sdk&#39;</span>);
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">S3</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">AWS</span>.<span style="color:#a6e22e">S3</span>({ <span style="color:#a6e22e">signatureVersion</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;v4&#39;</span> });
+<span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">Rekognition</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">AWS</span>.<span style="color:#a6e22e">Rekognition</span>();
+</span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">DynamoDBDocClient</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">AWS</span>.<span style="color:#a6e22e">DynamoDB</span>.<span style="color:#a6e22e">DocumentClient</span>({<span style="color:#a6e22e">apiVersion</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;2012-08-10&#39;</span>});
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">uuidv4</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;uuid/v4&#39;</span>);
+
+<span style="color:#75715e">/*
+</span><span style="color:#75715e">Note: Sharp requires native extensions to be installed in a way that is compatible
+</span><span style="color:#75715e">with Amazon Linux (in order to run successfully in a Lambda execution environment).
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">If you&#39;re not working in Cloud9, you can follow the instructions on http://sharp.pixelplumbing.com/en/stable/install/#aws-lambda how to install the module and native dependencies.
+</span><span style="color:#75715e">*/</span>
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">Sharp</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;sharp&#39;</span>);
+
+<span style="color:#75715e">// We&#39;ll expect these environment variables to be defined when the Lambda function is deployed
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">THUMBNAIL_WIDTH</span> <span style="color:#f92672">=</span> parseInt(<span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">THUMBNAIL_WIDTH</span>, <span style="color:#ae81ff">10</span>);
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">THUMBNAIL_HEIGHT</span> <span style="color:#f92672">=</span> parseInt(<span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">THUMBNAIL_HEIGHT</span>, <span style="color:#ae81ff">10</span>);
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">DYNAMODB_PHOTOS_TABLE_NAME</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">DYNAMODB_PHOTOS_TABLE_ARN</span>.<span style="color:#a6e22e">split</span>(<span style="color:#e6db74">&#39;/&#39;</span>)[<span style="color:#ae81ff">1</span>];
+
+<span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getLabelNames</span>(<span style="color:#a6e22e">bucketName</span>, <span style="color:#a6e22e">key</span>) {
+  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">params</span> <span style="color:#f92672">=</span> {
+<span style="display:block;width:100%;background-color:#3c3d38">    <span style="color:#a6e22e">Image</span><span style="color:#f92672">:</span> {
+</span><span style="display:block;width:100%;background-color:#3c3d38">      <span style="color:#a6e22e">S3Object</span><span style="color:#f92672">:</span> {
+</span><span style="display:block;width:100%;background-color:#3c3d38">        <span style="color:#a6e22e">Bucket</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">bucketName</span>, 
+</span><span style="display:block;width:100%;background-color:#3c3d38">        <span style="color:#a6e22e">Name</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">key</span>
+</span><span style="display:block;width:100%;background-color:#3c3d38">      }
+</span><span style="display:block;width:100%;background-color:#3c3d38">    }, 
+</span><span style="display:block;width:100%;background-color:#3c3d38">    <span style="color:#a6e22e">MaxLabels</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">50</span>, 
+</span><span style="display:block;width:100%;background-color:#3c3d38">    <span style="color:#a6e22e">MinConfidence</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">70</span>
+</span><span style="display:block;width:100%;background-color:#3c3d38">  };
+</span><span style="display:block;width:100%;background-color:#3c3d38">  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">detectionResult</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">Rekognition</span>.<span style="color:#a6e22e">detectLabels</span>(<span style="color:#a6e22e">params</span>).<span style="color:#a6e22e">promise</span>();
+</span><span style="display:block;width:100%;background-color:#3c3d38">  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">labelNames</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">detectionResult</span>.<span style="color:#a6e22e">Labels</span>.<span style="color:#a6e22e">map</span>((<span style="color:#a6e22e">l</span>) =&gt; <span style="color:#a6e22e">l</span>.<span style="color:#a6e22e">Name</span>.<span style="color:#a6e22e">toLowerCase</span>()); 
+</span><span style="display:block;width:100%;background-color:#3c3d38">  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">labelNames</span>;
+</span><span style="display:block;width:100%;background-color:#3c3d38">}
+</span><span style="display:block;width:100%;background-color:#3c3d38">
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">storePhotoInfo</span>(<span style="color:#a6e22e">item</span>) {
+</span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">params</span> <span style="color:#f92672">=</span> {
+        <span style="color:#a6e22e">Item</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">item</span>,
+        <span style="color:#a6e22e">TableName</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">DYNAMODB_PHOTOS_TABLE_NAME</span>
+    };
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">DynamoDBDocClient</span>.<span style="color:#a6e22e">put</span>(<span style="color:#a6e22e">params</span>).<span style="color:#a6e22e">promise</span>();
+}
+
+<span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getMetadata</span>(<span style="color:#a6e22e">bucketName</span>, <span style="color:#a6e22e">key</span>) {
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">headResult</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">S3</span>.<span style="color:#a6e22e">headObject</span>({<span style="color:#a6e22e">Bucket</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">bucketName</span>, <span style="color:#a6e22e">Key</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">key</span> }).<span style="color:#a6e22e">promise</span>();
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">headResult</span>.<span style="color:#a6e22e">Metadata</span>;
+}
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">thumbnailKey</span>(<span style="color:#a6e22e">filename</span>) {
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">`public/resized/</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">filename</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>;
+}
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">fullsizeKey</span>(<span style="color:#a6e22e">filename</span>) {
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">`public/</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">filename</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>;
+}
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">makeThumbnail</span>(<span style="color:#a6e22e">photo</span>) {
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">Sharp</span>(<span style="color:#a6e22e">photo</span>).<span style="color:#a6e22e">resize</span>(<span style="color:#a6e22e">THUMBNAIL_WIDTH</span>, <span style="color:#a6e22e">THUMBNAIL_HEIGHT</span>).<span style="color:#a6e22e">toBuffer</span>();
+}
+
+<span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">resize</span>(<span style="color:#a6e22e">bucketName</span>, <span style="color:#a6e22e">key</span>) {
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">originalPhoto</span> <span style="color:#f92672">=</span> (<span style="color:#66d9ef">await</span> <span style="color:#a6e22e">S3</span>.<span style="color:#a6e22e">getObject</span>({ <span style="color:#a6e22e">Bucket</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">bucketName</span>, <span style="color:#a6e22e">Key</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">key</span> }).<span style="color:#a6e22e">promise</span>()).<span style="color:#a6e22e">Body</span>;
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">originalPhotoName</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">key</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">&#39;uploads/&#39;</span>, <span style="color:#e6db74">&#39;&#39;</span>);
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">originalPhotoDimensions</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">Sharp</span>(<span style="color:#a6e22e">originalPhoto</span>).<span style="color:#a6e22e">metadata</span>();
+
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">thumbnail</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">makeThumbnail</span>(<span style="color:#a6e22e">originalPhoto</span>);
+
+    <span style="color:#66d9ef">await</span> Promise.<span style="color:#a6e22e">all</span>([
+        <span style="color:#a6e22e">S3</span>.<span style="color:#a6e22e">putObject</span>({
+            <span style="color:#a6e22e">Body</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">thumbnail</span>,
+            <span style="color:#a6e22e">Bucket</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">bucketName</span>,
+            <span style="color:#a6e22e">Key</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">thumbnailKey</span>(<span style="color:#a6e22e">originalPhotoName</span>),
+        }).<span style="color:#a6e22e">promise</span>(),
+
+        <span style="color:#a6e22e">S3</span>.<span style="color:#a6e22e">copyObject</span>({
+            <span style="color:#a6e22e">Bucket</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">bucketName</span>,
+            <span style="color:#a6e22e">CopySource</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">bucketName</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">key</span>,
+            <span style="color:#a6e22e">Key</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">fullsizeKey</span>(<span style="color:#a6e22e">originalPhotoName</span>),
+        }).<span style="color:#a6e22e">promise</span>(),
+    ]);
+
+    <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">S3</span>.<span style="color:#a6e22e">deleteObject</span>({
+        <span style="color:#a6e22e">Bucket</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">bucketName</span>,
+        <span style="color:#a6e22e">Key</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">key</span>
+    }).<span style="color:#a6e22e">promise</span>();
+
+    <span style="color:#66d9ef">return</span> {
+        <span style="color:#a6e22e">photoId</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">originalPhotoName</span>,
         
-            </div> 
+        <span style="color:#a6e22e">thumbnail</span><span style="color:#f92672">:</span> {
+            <span style="color:#a6e22e">key</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">thumbnailKey</span>(<span style="color:#a6e22e">originalPhotoName</span>),
+            <span style="color:#a6e22e">width</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">THUMBNAIL_WIDTH</span>,
+            <span style="color:#a6e22e">height</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">THUMBNAIL_HEIGHT</span>
+        },
+
+        <span style="color:#a6e22e">fullsize</span><span style="color:#f92672">:</span> {
+            <span style="color:#a6e22e">key</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">fullsizeKey</span>(<span style="color:#a6e22e">originalPhotoName</span>),
+            <span style="color:#a6e22e">width</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">originalPhotoDimensions</span>.<span style="color:#a6e22e">width</span>,
+            <span style="color:#a6e22e">height</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">originalPhotoDimensions</span>.<span style="color:#a6e22e">height</span>
+        }
+    };
+};
+
+<span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">processRecord</span>(<span style="color:#a6e22e">record</span>) {
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">bucketName</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">record</span>.<span style="color:#a6e22e">s3</span>.<span style="color:#a6e22e">bucket</span>.<span style="color:#a6e22e">name</span>;
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">key</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">record</span>.<span style="color:#a6e22e">s3</span>.<span style="color:#a6e22e">object</span>.<span style="color:#a6e22e">key</span>;
+    
+    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">key</span>.<span style="color:#a6e22e">indexOf</span>(<span style="color:#e6db74">&#39;uploads&#39;</span>) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span>;
+    
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">metadata</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">getMetadata</span>(<span style="color:#a6e22e">bucketName</span>, <span style="color:#a6e22e">key</span>);
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">sizes</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">resize</span>(<span style="color:#a6e22e">bucketName</span>, <span style="color:#a6e22e">key</span>);   
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">labelNames</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">getLabelNames</span>(<span style="color:#a6e22e">bucketName</span>, <span style="color:#a6e22e">sizes</span>.<span style="color:#a6e22e">fullsize</span>.<span style="color:#a6e22e">key</span>);
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">id</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">uuidv4</span>();
+<span style="display:block;width:100%;background-color:#3c3d38">    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">item</span> <span style="color:#f92672">=</span> {
+</span>        <span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">id</span>,
+        <span style="color:#a6e22e">owner</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">metadata</span>.<span style="color:#a6e22e">owner</span>,
+        <span style="color:#a6e22e">labels</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">labelNames</span>,
+        <span style="color:#a6e22e">photoAlbumId</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">metadata</span>.<span style="color:#a6e22e">albumid</span>,
+<span style="display:block;width:100%;background-color:#3c3d38">        <span style="color:#a6e22e">bucket</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">bucketName</span>,
+</span>        <span style="color:#a6e22e">thumbnail</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">sizes</span>.<span style="color:#a6e22e">thumbnail</span>,
+        <span style="color:#a6e22e">fullsize</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">sizes</span>.<span style="color:#a6e22e">fullsize</span>,
+        <span style="color:#a6e22e">createdAt</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">new</span> Date().<span style="color:#a6e22e">getTime</span>()
+    }
+    <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">storePhotoInfo</span>(<span style="color:#a6e22e">item</span>);
+}
+
+<span style="color:#a6e22e">exports</span>.<span style="color:#a6e22e">handler</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">async</span> (<span style="color:#a6e22e">event</span>, <span style="color:#a6e22e">context</span>, <span style="color:#a6e22e">callback</span>) =&gt; {
+    <span style="color:#66d9ef">try</span> {
+        <span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">Records</span>.<span style="color:#a6e22e">forEach</span>(<span style="color:#a6e22e">processRecord</span>);
+        <span style="color:#a6e22e">callback</span>(<span style="color:#66d9ef">null</span>, { <span style="color:#a6e22e">status</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Photo Processed&#39;</span> });
+    }
+    <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">err</span>) {
+        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#a6e22e">err</span>);
+        <span style="color:#a6e22e">callback</span>(<span style="color:#a6e22e">err</span>);
+    }
+};
+</code></pre></div>
+
+<h3 id="what-we-changed">What we changed</h3>
+
+<ul>
+<li><p>Created an instance of <em>AWS.Rekognition</em> to interact with the Amazon Rekognition API</p></li>
+
+<li><p>Added the <em>getLabelNames</em> function to use <em>Rekognition.detectLabels</em> to return a list of appropriate labels for a given photo on S3</p></li>
+
+<li><p>Updated the <em>processPrcord</em> function to use the <em>getLabelNames</em> function to get labels for the photo and include them in the item record it persists to DynamoDB</p></li>
+</ul>
+
+<p>Our Photo Processor code now uses Amazon Rekognition&rsquo;s detectLabels API. But because we already added permissions for this action in the previous section, we won&rsquo;t need to update the CloudFormation template again.</p>
+
+<h3 id="re-deploying-the-photo-processor-lambda">Re-deploying the Photo Processor Lambda</h3>
+
+<p><strong>From the photo-albums directory, run:</strong> <code>amplify push</code> to deploy an updated version of the Photo Processor function.</p>
+
+<p>After the deploy finishes, try adding a new photo to an album. Then, go look at its row in the PhotoTable in DynamoDB and see if you see a labels property for the new upload. Hopefully you see some relevant labels for the photo!</p>
+
+
+<footer class=" footline" >
+	
+</footer>
+
+
         
         </div> 
         
@@ -1305,21 +1534,6 @@
             
                 
                     
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
                     
                 
                 
@@ -1337,24 +1551,8 @@
             
                 
                     
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
                         
-            
-            
-                
+                        
                     
                 
                 
@@ -1363,6 +1561,9 @@
                     
                     
 
+                    
+            
+        
                     
                         
             
@@ -1395,22 +1596,6 @@
                     
                     
 
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
                     
                         
             
@@ -1479,6 +1664,54 @@
             
         
                     
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
             
         
         
@@ -1486,10 +1719,10 @@
 
 
         
-            <a class="nav nav-prev" href="/amplify-photo-gallery-workshop/140_bonus/20_album_membership.html" title="Allowing Other Users To Collaborate In Albums"> <i class="fa fa-chevron-left"></i></a>
+            <a class="nav nav-prev" href="/amplify-photo-gallery-workshop/110_ai.html" title="Adding AI"> <i class="fa fa-chevron-left"></i></a>
         
         
-            <a class="nav nav-next" href="/amplify-photo-gallery-workshop/10_%EC%82%AC%EC%A0%84%EC%A4%80%EB%B9%84.html" title="사전준비" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+            <a class="nav nav-next" href="/amplify-photo-gallery-workshop/110_ai/20_prep_for_searching.html" title="Making Photos Searchable" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
         
     </div>
 

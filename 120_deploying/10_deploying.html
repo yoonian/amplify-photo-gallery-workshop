@@ -14,27 +14,27 @@
 
     <link rel="shortcut icon" href="/amplify-photo-gallery-workshop/images/favicon.png" type="image/x-icon" />
 <link rel="icon" href="/amplify-photo-gallery-workshop/images/favicon.png" type="image/x-icon" />
-    <title>Amplify Web App Workshop :: Amplify / AppSync / React Workshop</title>
+    <title>Deploying our app to S3 :: Amplify / AppSync / React Workshop</title>
 
     
-    <link href="/amplify-photo-gallery-workshop/css/nucleus.css?1553948119" rel="stylesheet">
+    <link href="/amplify-photo-gallery-workshop/css/nucleus.css?1553948120" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-    <link href="/amplify-photo-gallery-workshop/css/hybrid.css?1553948119" rel="stylesheet">
-    <link href="/amplify-photo-gallery-workshop/css/featherlight.min.css?1553948119" rel="stylesheet">
-    <link href="/amplify-photo-gallery-workshop/css/perfect-scrollbar.min.css?1553948119" rel="stylesheet">
-    <link href="/amplify-photo-gallery-workshop/css/auto-complete.css?1553948119" rel="stylesheet">
-    <link href="/amplify-photo-gallery-workshop/css/theme.css?1553948119" rel="stylesheet">
-    <link href="/amplify-photo-gallery-workshop/css/hugo-theme.css?1553948119" rel="stylesheet">
+    <link href="/amplify-photo-gallery-workshop/css/hybrid.css?1553948120" rel="stylesheet">
+    <link href="/amplify-photo-gallery-workshop/css/featherlight.min.css?1553948120" rel="stylesheet">
+    <link href="/amplify-photo-gallery-workshop/css/perfect-scrollbar.min.css?1553948120" rel="stylesheet">
+    <link href="/amplify-photo-gallery-workshop/css/auto-complete.css?1553948120" rel="stylesheet">
+    <link href="/amplify-photo-gallery-workshop/css/theme.css?1553948120" rel="stylesheet">
+    <link href="/amplify-photo-gallery-workshop/css/hugo-theme.css?1553948120" rel="stylesheet">
     
-      <link href="/amplify-photo-gallery-workshop/css/theme-mine.css?1553948119" rel="stylesheet">
+      <link href="/amplify-photo-gallery-workshop/css/theme-mine.css?1553948120" rel="stylesheet">
     
 
-    <link href="/amplify-photo-gallery-workshop/css/jquery-ui.min.css?1553948119" rel="stylesheet">
-    <link href="/amplify-photo-gallery-workshop/css/jquery-ui.structure.min.css?1553948119" rel="stylesheet">
-    <link href="/amplify-photo-gallery-workshop/css/jquery-ui.theme.min.css?1553948119" rel="stylesheet">
-    <script src="/amplify-photo-gallery-workshop/js/jquery-2.x.min.js?1553948119"></script>
-    <script src="/amplify-photo-gallery-workshop/js/jquery-ui.min.js?1553948119"></script>
-    <script src="/amplify-photo-gallery-workshop/js/tabs.js?1553948119"></script>
+    <link href="/amplify-photo-gallery-workshop/css/jquery-ui.min.css?1553948120" rel="stylesheet">
+    <link href="/amplify-photo-gallery-workshop/css/jquery-ui.structure.min.css?1553948120" rel="stylesheet">
+    <link href="/amplify-photo-gallery-workshop/css/jquery-ui.theme.min.css?1553948120" rel="stylesheet">
+    <script src="/amplify-photo-gallery-workshop/js/jquery-2.x.min.js?1553948120"></script>
+    <script src="/amplify-photo-gallery-workshop/js/jquery-ui.min.js?1553948120"></script>
+    <script src="/amplify-photo-gallery-workshop/js/tabs.js?1553948120"></script>
 
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{
@@ -44,7 +44,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/amplify-photo-gallery-workshop/">
+  <body class="" data-url="/amplify-photo-gallery-workshop/120_deploying/10_deploying.html">
     <nav id="sidebar" class="">
 
 
@@ -61,14 +61,14 @@
     <span data-search-clear=""><i class="fa fa-close"></i></span>
 </div>
 
-<script type="text/javascript" src="/amplify-photo-gallery-workshop/js/lunr.min.js?1553948119"></script>
-<script type="text/javascript" src="/amplify-photo-gallery-workshop/js/auto-complete.js?1553948119"></script>
+<script type="text/javascript" src="/amplify-photo-gallery-workshop/js/lunr.min.js?1553948120"></script>
+<script type="text/javascript" src="/amplify-photo-gallery-workshop/js/auto-complete.js?1553948120"></script>
 <script type="text/javascript">
     
         var baseurl = '\/amplify-photo-gallery-workshop\/';
     
 </script>
-<script type="text/javascript" src="/amplify-photo-gallery-workshop/js/search.js?1553948119"></script>
+<script type="text/javascript" src="/amplify-photo-gallery-workshop/js/search.js?1553948120"></script>
 
     
   </div>
@@ -664,7 +664,7 @@
   
     
     <li data-nav-id="/amplify-photo-gallery-workshop/120_deploying.html" title="Publishing Our App" class="dd-item 
-        
+        parent
         
         
         ">
@@ -688,7 +688,7 @@
  
   
     
-      <li data-nav-id="/amplify-photo-gallery-workshop/120_deploying/10_deploying.html" title="Deploying our app to S3" class="dd-item ">
+      <li data-nav-id="/amplify-photo-gallery-workshop/120_deploying/10_deploying.html" title="Deploying our app to S3" class="dd-item active">
         <a href="/amplify-photo-gallery-workshop/120_deploying/10_deploying.html">
         Deploying our app to S3
         
@@ -893,35 +893,111 @@
         <div id="overlay"></div>
         <div class="padding highlightable">
               
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fa fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fa fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/amplify-photo-gallery-workshop/'>Amplify Web App Workshop</a> > <a href='/amplify-photo-gallery-workshop/120_deploying.html'>Publishing Our App</a> > Deploying our app to S3
+          
+        
+          
+        
+          
+        
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
 
         
-          <div id="chapter">
-        
         <div id="body-inner">
+          
+            <h1>Deploying our app to S3</h1>
           
 
         
 
-<span id="sidebar-toggle-span">
-<a href="#" id="sidebar-toggle" data-sidebar-toggle=""><i class="fa fa-bars"></i> navigation</a>
-</span>
 
- 
+<p>Before we build and publish our app, we should free up some memory on the Cloud9 instance. If you&rsquo;re using a micro Cloud9 instance size, there&rsquo;s a good chance there won&rsquo;t be enough memory available to keep our development web server running and to create a production build.</p>
+
+<ol>
+<li><p>Go to the <strong>terminal</strong> tab that&rsquo;s running the <strong>development webserver</strong> (where you ran <em>npm start</em>)</p></li>
+
+<li><p>Press <strong>Control-C</strong> to interrupt the development webserver and kill it.</p></li>
+</ol>
+
+<p>The AWS Amplify CLI makes it easy to deploy our app to a publicly accessible bucket on S3.</p>
+
+<ol>
+<li><p><strong>Run</strong> <code>amplify hosting add</code>, select a deployment mode (for this workshop, select &lsquo;Development&rsquo;), and respond to the questions (you can accept the default value of index.html for the index and error doc).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ amplify hosting add
+
+? Select the environment setup: 
+
+DEV <span style="color:#f92672">(</span>S3 only with HTTP<span style="color:#f92672">)</span>
 
 
-<h2 id="aws-amplify와-aws-appsync로-br-사진-공유-웹-어플리케이션-구현">AWS Amplify와 AWS AppSync로  <br/> 사진 공유 웹 어플리케이션 구현</h2>
+? hosting bucket name 
 
-<p><br></p>
+photoalbums-19700101010203--hostingbucket
 
-<h3 id="환영합니다">환영합니다!</h3>
 
-<p style='text-align: left;'>
-    이번 워크샵에서 React를 사용하여 사용자들이 사진을 업로드하고 공유하는 data-driven 기반의 안전한 사진 갤러리 웹 어플리케이션을 구현합니다. AWS AppSync를 이용하여 Amazon DynamoDB에 백업된 데이터를 GraphQL API를 통하여 빠르게 가져오고 실행합니다. AWS Amplify 라이브러리를 사용하여 사용자를 인증하고, API와 통신하며, 사진 업로드 관리를 어떻게 하는지 시연합니다. 마지막으로 Amazon Rekognition으로 AI 기반 오브젝트 태그를 추가하여 사용자가 수동으로 검색 데이터 입력하지 않아도 사진을 찾아주도록 구현합니다.
-</p>
+? index doc <span style="color:#66d9ef">for</span> the website 
+
+index.html
+
+
+? error doc <span style="color:#66d9ef">for</span> the website 
+
+index.html</code></pre></div></li>
+
+<li><p><strong>Run</strong> <code>amplify push</code></p></li>
+
+<li><p>Wait for the new S3 bucket that will serve our app&rsquo;s static content is created. This usually takes about a minute.</p></li>
+
+<li><p><strong>Run</strong> <code>amplify publish</code></p></li>
+
+<li><p>Wait while Amplify builds a production version of our app and deploys it to the hosting bucket. This process usually takes a minute or two.</p></li>
+</ol>
+
+<p>After the build and deploy finishes, you&rsquo;ll see a URL for the version of deployed app. Any time you make new changes to the app, just re-run <code>amplify publish</code> whenever you want to push a new build out.</p>
+
+
+<footer class=" footline" >
 	
-  
-        
-            </div> 
+</footer>
+
+
         
         </div> 
         
@@ -1369,6 +1445,58 @@
             
                 
                     
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
                 
                 
 
@@ -1431,54 +1559,6 @@
             
         
                     
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
             
         
         
@@ -1486,10 +1566,10 @@
 
 
         
-            <a class="nav nav-prev" href="/amplify-photo-gallery-workshop/140_bonus/20_album_membership.html" title="Allowing Other Users To Collaborate In Albums"> <i class="fa fa-chevron-left"></i></a>
+            <a class="nav nav-prev" href="/amplify-photo-gallery-workshop/120_deploying.html" title="Publishing Our App"> <i class="fa fa-chevron-left"></i></a>
         
         
-            <a class="nav nav-next" href="/amplify-photo-gallery-workshop/10_%EC%82%AC%EC%A0%84%EC%A4%80%EB%B9%84.html" title="사전준비" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+            <a class="nav nav-next" href="/amplify-photo-gallery-workshop/130_wrapping_up.html" title="Wrapping Up" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
         
     </div>
 
@@ -1498,20 +1578,20 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/amplify-photo-gallery-workshop/js/clipboard.min.js?1553948119"></script>
-    <script src="/amplify-photo-gallery-workshop/js/perfect-scrollbar.min.js?1553948119"></script>
-    <script src="/amplify-photo-gallery-workshop/js/perfect-scrollbar.jquery.min.js?1553948119"></script>
-    <script src="/amplify-photo-gallery-workshop/js/jquery.sticky.js?1553948119"></script>
-    <script src="/amplify-photo-gallery-workshop/js/featherlight.min.js?1553948119"></script>
-    <script src="/amplify-photo-gallery-workshop/js/html5shiv-printshiv.min.js?1553948119"></script>
-    <script src="/amplify-photo-gallery-workshop/js/highlight.pack.js?1553948119"></script>
+    <script src="/amplify-photo-gallery-workshop/js/clipboard.min.js?1553948120"></script>
+    <script src="/amplify-photo-gallery-workshop/js/perfect-scrollbar.min.js?1553948120"></script>
+    <script src="/amplify-photo-gallery-workshop/js/perfect-scrollbar.jquery.min.js?1553948120"></script>
+    <script src="/amplify-photo-gallery-workshop/js/jquery.sticky.js?1553948120"></script>
+    <script src="/amplify-photo-gallery-workshop/js/featherlight.min.js?1553948120"></script>
+    <script src="/amplify-photo-gallery-workshop/js/html5shiv-printshiv.min.js?1553948120"></script>
+    <script src="/amplify-photo-gallery-workshop/js/highlight.pack.js?1553948120"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/amplify-photo-gallery-workshop/js/modernizr.custom.71422.js?1553948119"></script>
-    <script src="/amplify-photo-gallery-workshop/js/learn.js?1553948119"></script>
-    <script src="/amplify-photo-gallery-workshop/js/hugo-learn.js?1553948119"></script>
+    <script src="/amplify-photo-gallery-workshop/js/modernizr.custom.71422.js?1553948120"></script>
+    <script src="/amplify-photo-gallery-workshop/js/learn.js?1553948120"></script>
+    <script src="/amplify-photo-gallery-workshop/js/hugo-learn.js?1553948120"></script>
 
-    <link href="/amplify-photo-gallery-workshop/mermaid/mermaid.css?1553948119" type="text/css" rel="stylesheet" />
-    <script src="/amplify-photo-gallery-workshop/mermaid/mermaid.js?1553948119"></script>
+    <link href="/amplify-photo-gallery-workshop/mermaid/mermaid.css?1553948120" type="text/css" rel="stylesheet" />
+    <script src="/amplify-photo-gallery-workshop/mermaid/mermaid.js?1553948120"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

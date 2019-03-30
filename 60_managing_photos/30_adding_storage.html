@@ -14,27 +14,27 @@
 
     <link rel="shortcut icon" href="/amplify-photo-gallery-workshop/images/favicon.png" type="image/x-icon" />
 <link rel="icon" href="/amplify-photo-gallery-workshop/images/favicon.png" type="image/x-icon" />
-    <title>Amplify Web App Workshop :: Amplify / AppSync / React Workshop</title>
+    <title>Adding Cloud Storage :: Amplify / AppSync / React Workshop</title>
 
     
-    <link href="/amplify-photo-gallery-workshop/css/nucleus.css?1553948119" rel="stylesheet">
+    <link href="/amplify-photo-gallery-workshop/css/nucleus.css?1553948120" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-    <link href="/amplify-photo-gallery-workshop/css/hybrid.css?1553948119" rel="stylesheet">
-    <link href="/amplify-photo-gallery-workshop/css/featherlight.min.css?1553948119" rel="stylesheet">
-    <link href="/amplify-photo-gallery-workshop/css/perfect-scrollbar.min.css?1553948119" rel="stylesheet">
-    <link href="/amplify-photo-gallery-workshop/css/auto-complete.css?1553948119" rel="stylesheet">
-    <link href="/amplify-photo-gallery-workshop/css/theme.css?1553948119" rel="stylesheet">
-    <link href="/amplify-photo-gallery-workshop/css/hugo-theme.css?1553948119" rel="stylesheet">
+    <link href="/amplify-photo-gallery-workshop/css/hybrid.css?1553948120" rel="stylesheet">
+    <link href="/amplify-photo-gallery-workshop/css/featherlight.min.css?1553948120" rel="stylesheet">
+    <link href="/amplify-photo-gallery-workshop/css/perfect-scrollbar.min.css?1553948120" rel="stylesheet">
+    <link href="/amplify-photo-gallery-workshop/css/auto-complete.css?1553948120" rel="stylesheet">
+    <link href="/amplify-photo-gallery-workshop/css/theme.css?1553948120" rel="stylesheet">
+    <link href="/amplify-photo-gallery-workshop/css/hugo-theme.css?1553948120" rel="stylesheet">
     
-      <link href="/amplify-photo-gallery-workshop/css/theme-mine.css?1553948119" rel="stylesheet">
+      <link href="/amplify-photo-gallery-workshop/css/theme-mine.css?1553948120" rel="stylesheet">
     
 
-    <link href="/amplify-photo-gallery-workshop/css/jquery-ui.min.css?1553948119" rel="stylesheet">
-    <link href="/amplify-photo-gallery-workshop/css/jquery-ui.structure.min.css?1553948119" rel="stylesheet">
-    <link href="/amplify-photo-gallery-workshop/css/jquery-ui.theme.min.css?1553948119" rel="stylesheet">
-    <script src="/amplify-photo-gallery-workshop/js/jquery-2.x.min.js?1553948119"></script>
-    <script src="/amplify-photo-gallery-workshop/js/jquery-ui.min.js?1553948119"></script>
-    <script src="/amplify-photo-gallery-workshop/js/tabs.js?1553948119"></script>
+    <link href="/amplify-photo-gallery-workshop/css/jquery-ui.min.css?1553948120" rel="stylesheet">
+    <link href="/amplify-photo-gallery-workshop/css/jquery-ui.structure.min.css?1553948120" rel="stylesheet">
+    <link href="/amplify-photo-gallery-workshop/css/jquery-ui.theme.min.css?1553948120" rel="stylesheet">
+    <script src="/amplify-photo-gallery-workshop/js/jquery-2.x.min.js?1553948120"></script>
+    <script src="/amplify-photo-gallery-workshop/js/jquery-ui.min.js?1553948120"></script>
+    <script src="/amplify-photo-gallery-workshop/js/tabs.js?1553948120"></script>
 
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{
@@ -44,7 +44,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/amplify-photo-gallery-workshop/">
+  <body class="" data-url="/amplify-photo-gallery-workshop/60_managing_photos/30_adding_storage.html">
     <nav id="sidebar" class="">
 
 
@@ -61,14 +61,14 @@
     <span data-search-clear=""><i class="fa fa-close"></i></span>
 </div>
 
-<script type="text/javascript" src="/amplify-photo-gallery-workshop/js/lunr.min.js?1553948119"></script>
-<script type="text/javascript" src="/amplify-photo-gallery-workshop/js/auto-complete.js?1553948119"></script>
+<script type="text/javascript" src="/amplify-photo-gallery-workshop/js/lunr.min.js?1553948120"></script>
+<script type="text/javascript" src="/amplify-photo-gallery-workshop/js/auto-complete.js?1553948120"></script>
 <script type="text/javascript">
     
         var baseurl = '\/amplify-photo-gallery-workshop\/';
     
 </script>
-<script type="text/javascript" src="/amplify-photo-gallery-workshop/js/search.js?1553948119"></script>
+<script type="text/javascript" src="/amplify-photo-gallery-workshop/js/search.js?1553948120"></script>
 
     
   </div>
@@ -435,7 +435,7 @@
   
     
     <li data-nav-id="/amplify-photo-gallery-workshop/60_managing_photos.html" title="Managing Photos" class="dd-item 
-        
+        parent
         
         
         ">
@@ -459,7 +459,7 @@
  
   
     
-      <li data-nav-id="/amplify-photo-gallery-workshop/60_managing_photos/30_adding_storage.html" title="Adding Cloud Storage" class="dd-item ">
+      <li data-nav-id="/amplify-photo-gallery-workshop/60_managing_photos/30_adding_storage.html" title="Adding Cloud Storage" class="dd-item active">
         <a href="/amplify-photo-gallery-workshop/60_managing_photos/30_adding_storage.html">
         Adding Cloud Storage
         
@@ -893,35 +893,135 @@
         <div id="overlay"></div>
         <div class="padding highlightable">
               
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fa fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fa fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/amplify-photo-gallery-workshop/'>Amplify Web App Workshop</a> > <a href='/amplify-photo-gallery-workshop/60_managing_photos.html'>Managing Photos</a> > Adding Cloud Storage
+          
+        
+          
+        
+          
+        
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#configuring-and-adding-storage">Configuring and adding storage</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
 
         
-          <div id="chapter">
-        
         <div id="body-inner">
+          
+            <h1>Adding Cloud Storage</h1>
           
 
         
 
-<span id="sidebar-toggle-span">
-<a href="#" id="sidebar-toggle" data-sidebar-toggle=""><i class="fa fa-bars"></i> navigation</a>
-</span>
-
- 
 
 
-<h2 id="aws-amplify와-aws-appsync로-br-사진-공유-웹-어플리케이션-구현">AWS Amplify와 AWS AppSync로  <br/> 사진 공유 웹 어플리케이션 구현</h2>
 
-<p><br></p>
+<p>We&rsquo;ll need a place to store all of the photos that get uploaded to our albums. Amazon Simple Storage Service (S3) is a great option for this and Amplify&rsquo;s Storage module makes setting up and working with S3 very easy.</p>
 
-<h3 id="환영합니다">환영합니다!</h3>
+<div class="notices tip" >
+You can read more about Amplify's Storage module [here](https://aws-amplify.github.io/amplify-js/media/storage_guide).
+</div>
 
-<p style='text-align: left;'>
-    이번 워크샵에서 React를 사용하여 사용자들이 사진을 업로드하고 공유하는 data-driven 기반의 안전한 사진 갤러리 웹 어플리케이션을 구현합니다. AWS AppSync를 이용하여 Amazon DynamoDB에 백업된 데이터를 GraphQL API를 통하여 빠르게 가져오고 실행합니다. AWS Amplify 라이브러리를 사용하여 사용자를 인증하고, API와 통신하며, 사진 업로드 관리를 어떻게 하는지 시연합니다. 마지막으로 Amazon Rekognition으로 AI 기반 오브젝트 태그를 추가하여 사용자가 수동으로 검색 데이터 입력하지 않아도 사진을 찾아주도록 구현합니다.
-</p>
+<h3 id="configuring-and-adding-storage">Configuring and adding storage</h3>
+
+<p>First, we&rsquo;ll use the Amplify CLI to enable storage for our app. This will create a bucket on Amazon S3 and set it up with appropriate permissions so that users who are logged in to our app can read from and write to it.</p>
+
+<ol>
+<li><p><strong>From the photo-albums directory, run</strong> <code>amplify add storage</code></p></li>
+
+<li><p><strong>Select &lsquo;Content&rsquo;</strong> at the prompt</p></li>
+
+<li><p><strong>Enter values or accept defaults</strong> for the resource category and bucket name</p></li>
+
+<li><p>Configure it so that <strong>only authenticated users</strong> have access with <strong>read/write permissions</strong>.</p>
+
+<p>Here is sample output with responses:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">$ amplify add storage
+
+
+? Please select from one of the below mentioned services: 
+
+Content (Images, audio, video, etc.)
+
+
+? Please provide a friendly name for your resource that will be used to label this category in the project: 
+
+photoalbumsstorage
+
+
+? Please provide bucket name: 
+
+&lt;accept the default value&gt;
+
+
+? Who should have access: 
+
+Auth users only
+
+
+? What kind of access do you want for Authenticated users: 
+
+read/write</code></pre></div></li>
+</ol>
+
+<p>Now we&rsquo;ll have Amplify modify our cloud environment, provisioning the storage resources we just added.</p>
+
+<ol>
+<li><strong>Run</strong> <code>amplify push</code></li>
+<li><strong>Press Enter</strong> to confirm the changes</li>
+<li>Wait for the provisioning to finish. Adding storage usually only takes a minute or two.</li>
+</ol>
+
+
+<footer class=" footline" >
 	
-  
-        
-            </div> 
+</footer>
+
+
         
         </div> 
         
@@ -1209,53 +1309,6 @@
             
                 
                     
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
                     
                 
                 
@@ -1273,101 +1326,8 @@
             
                 
                     
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
                         
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
                         
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
                     
                 
                 
@@ -1476,6 +1436,150 @@
             
         
                     
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
             
         
                     
@@ -1486,10 +1590,10 @@
 
 
         
-            <a class="nav nav-prev" href="/amplify-photo-gallery-workshop/140_bonus/20_album_membership.html" title="Allowing Other Users To Collaborate In Albums"> <i class="fa fa-chevron-left"></i></a>
+            <a class="nav nav-prev" href="/amplify-photo-gallery-workshop/60_managing_photos.html" title="Managing Photos"> <i class="fa fa-chevron-left"></i></a>
         
         
-            <a class="nav nav-next" href="/amplify-photo-gallery-workshop/10_%EC%82%AC%EC%A0%84%EC%A4%80%EB%B9%84.html" title="사전준비" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+            <a class="nav nav-next" href="/amplify-photo-gallery-workshop/60_managing_photos/40_upload_photos_consolidated.html" title="Managing Photos" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
         
     </div>
 
@@ -1498,20 +1602,20 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/amplify-photo-gallery-workshop/js/clipboard.min.js?1553948119"></script>
-    <script src="/amplify-photo-gallery-workshop/js/perfect-scrollbar.min.js?1553948119"></script>
-    <script src="/amplify-photo-gallery-workshop/js/perfect-scrollbar.jquery.min.js?1553948119"></script>
-    <script src="/amplify-photo-gallery-workshop/js/jquery.sticky.js?1553948119"></script>
-    <script src="/amplify-photo-gallery-workshop/js/featherlight.min.js?1553948119"></script>
-    <script src="/amplify-photo-gallery-workshop/js/html5shiv-printshiv.min.js?1553948119"></script>
-    <script src="/amplify-photo-gallery-workshop/js/highlight.pack.js?1553948119"></script>
+    <script src="/amplify-photo-gallery-workshop/js/clipboard.min.js?1553948120"></script>
+    <script src="/amplify-photo-gallery-workshop/js/perfect-scrollbar.min.js?1553948120"></script>
+    <script src="/amplify-photo-gallery-workshop/js/perfect-scrollbar.jquery.min.js?1553948120"></script>
+    <script src="/amplify-photo-gallery-workshop/js/jquery.sticky.js?1553948120"></script>
+    <script src="/amplify-photo-gallery-workshop/js/featherlight.min.js?1553948120"></script>
+    <script src="/amplify-photo-gallery-workshop/js/html5shiv-printshiv.min.js?1553948120"></script>
+    <script src="/amplify-photo-gallery-workshop/js/highlight.pack.js?1553948120"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/amplify-photo-gallery-workshop/js/modernizr.custom.71422.js?1553948119"></script>
-    <script src="/amplify-photo-gallery-workshop/js/learn.js?1553948119"></script>
-    <script src="/amplify-photo-gallery-workshop/js/hugo-learn.js?1553948119"></script>
+    <script src="/amplify-photo-gallery-workshop/js/modernizr.custom.71422.js?1553948120"></script>
+    <script src="/amplify-photo-gallery-workshop/js/learn.js?1553948120"></script>
+    <script src="/amplify-photo-gallery-workshop/js/hugo-learn.js?1553948120"></script>
 
-    <link href="/amplify-photo-gallery-workshop/mermaid/mermaid.css?1553948119" type="text/css" rel="stylesheet" />
-    <script src="/amplify-photo-gallery-workshop/mermaid/mermaid.js?1553948119"></script>
+    <link href="/amplify-photo-gallery-workshop/mermaid/mermaid.css?1553948120" type="text/css" rel="stylesheet" />
+    <script src="/amplify-photo-gallery-workshop/mermaid/mermaid.js?1553948120"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

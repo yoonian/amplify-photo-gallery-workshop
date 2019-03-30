@@ -14,7 +14,7 @@
 
     <link rel="shortcut icon" href="/amplify-photo-gallery-workshop/images/favicon.png" type="image/x-icon" />
 <link rel="icon" href="/amplify-photo-gallery-workshop/images/favicon.png" type="image/x-icon" />
-    <title>Amplify Web App Workshop :: Amplify / AppSync / React Workshop</title>
+    <title>What We&#39;ll Build :: Amplify / AppSync / React Workshop</title>
 
     
     <link href="/amplify-photo-gallery-workshop/css/nucleus.css?1553948119" rel="stylesheet">
@@ -44,7 +44,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/amplify-photo-gallery-workshop/">
+  <body class="" data-url="/amplify-photo-gallery-workshop/20_getting_started/10_what_we_will_build.html">
     <nav id="sidebar" class="">
 
 
@@ -174,7 +174,7 @@
   
     
     <li data-nav-id="/amplify-photo-gallery-workshop/20_getting_started.html" title="Getting Started" class="dd-item 
-        
+        parent
         
         
         ">
@@ -198,7 +198,7 @@
  
   
     
-      <li data-nav-id="/amplify-photo-gallery-workshop/20_getting_started/10_what_we_will_build.html" title="What We&#39;ll Build" class="dd-item ">
+      <li data-nav-id="/amplify-photo-gallery-workshop/20_getting_started/10_what_we_will_build.html" title="What We&#39;ll Build" class="dd-item active">
         <a href="/amplify-photo-gallery-workshop/20_getting_started/10_what_we_will_build.html">
         What We&#39;ll Build
         
@@ -893,35 +893,131 @@
         <div id="overlay"></div>
         <div class="padding highlightable">
               
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fa fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fa fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/amplify-photo-gallery-workshop/'>Amplify Web App Workshop</a> > <a href='/amplify-photo-gallery-workshop/20_getting_started.html'>Getting Started</a> > What We'll Build
+          
+        
+          
+        
+          
+        
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#our-goal">Our Goal</a></li>
+<li><a href="#the-architecture">The Architecture</a></li>
+<li><a href="#our-tools">Our Tools</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
 
         
-          <div id="chapter">
-        
         <div id="body-inner">
+          
+            <h1>What We&#39;ll Build</h1>
           
 
         
 
-<span id="sidebar-toggle-span">
-<a href="#" id="sidebar-toggle" data-sidebar-toggle=""><i class="fa fa-bars"></i> navigation</a>
-</span>
-
- 
 
 
-<h2 id="aws-amplify와-aws-appsync로-br-사진-공유-웹-어플리케이션-구현">AWS Amplify와 AWS AppSync로  <br/> 사진 공유 웹 어플리케이션 구현</h2>
 
-<p><br></p>
+<h3 id="our-goal">Our Goal</h3>
 
-<h3 id="환영합니다">환영합니다!</h3>
+<p>In this workshop, we&rsquo;ll build an app with quite a few features, including:</p>
 
-<p style='text-align: left;'>
-    이번 워크샵에서 React를 사용하여 사용자들이 사진을 업로드하고 공유하는 data-driven 기반의 안전한 사진 갤러리 웹 어플리케이션을 구현합니다. AWS AppSync를 이용하여 Amazon DynamoDB에 백업된 데이터를 GraphQL API를 통하여 빠르게 가져오고 실행합니다. AWS Amplify 라이브러리를 사용하여 사용자를 인증하고, API와 통신하며, 사진 업로드 관리를 어떻게 하는지 시연합니다. 마지막으로 Amazon Rekognition으로 AI 기반 오브젝트 태그를 추가하여 사용자가 수동으로 검색 데이터 입력하지 않아도 사진을 찾아주도록 구현합니다.
-</p>
+<ul>
+<li><p>Allowing user sign up and authentication, so we know who owns which photo albums</p></li>
+
+<li><p>Building an API server, so our front end has a way to load the appropriate albums and photos to show a given user</p></li>
+
+<li><p>Storing data about albums, photos, and permissions of who can view what, so that our API has a fast and reliable place to query and save data to</p></li>
+
+<li><p>Storing and serving photos, so we have a place to put all of the photos that users are uploading to albums</p></li>
+
+<li><p>Automatically creating photo thumbnails, so we don&rsquo;t need to deliver full-resolution photos when users browse a photo album&rsquo;s list of photos</p></li>
+
+<li><p>Automatically detecting relevant labels for each uploaded photo and making photos searchable based on these labels</p></li>
+</ul>
+
+<h3 id="the-architecture">The Architecture</h3>
+
+<p>Here&rsquo;s a map of the services we&rsquo;ll use and how they&rsquo;ll all connect.</p>
+
+<p><img src="/images/architecture.png" alt="Serverless Photo Albums Architecture" /></p>
+
+<h3 id="our-tools">Our Tools</h3>
+
+<p>If we were to try and build scalable and highly-available systems to handle each of the above concerns on our own, we&rsquo;d probably never get around to building our app! Fortunately, AWS provides services and tooling to handle a lot of the undifferentiated heavy lifting involved in building modern, robust applications. We&rsquo;ll use a number of these services and tools in our solution, including:</p>
+
+<ul>
+<li><p>The <a href="https://github.com/aws-amplify/amplify-cli" target="_blank">AWS Amplify CLI</a>, to rapidly provision and configure our cloud services</p></li>
+
+<li><p>The <a href="https://aws-amplify.github.io/" target="_blank">AWS Amplify JavaScript library</a>, to connect our front end to cloud resources</p></li>
+
+<li><p><a href="https://aws.amazon.com/cognito/" target="_blank">Amazon Cognito</a>, to handle user sign up authorization</p></li>
+
+<li><p><a href="https://aws.amazon.com/s3/" target="_blank">Amazon Simple Storage Service</a> (S3), to store and serve as many photos as our users care to upload, and to host the static assets for our app</p></li>
+
+<li><p><a href="https://aws.amazon.com/dynamodb/" target="_blank">Amazon DynamoDB</a>, to provide millisecond response times to API queries for album and photo data</p></li>
+
+<li><p><a href="https://aws.amazon.com/appsync/" target="_blank">AWS AppSync</a>, to host a GraphQL API for our front end</p></li>
+
+<li><p><a href="https://aws.amazon.com/lambda/" target="_blank">AWS Lambda</a>, to create photo thumbnails asynchronously in the cloud</p></li>
+
+<li><p><a href="https://aws.amazon.com/rekognition/" target="_blank">Amazon Rekognition</a>, to detect relevant labels for uploaded photos</p></li>
+
+<li><p><a href="https://aws.amazon.com/elasticsearch-service/" target="_blank">Amazon Elasticsearch Service</a>, to index and search our photos by their labels</p></li>
+</ul>
+
+<p>If any or all of these services are new to you, don&rsquo;t worry. We&rsquo;ll cover everything you need to know to get started using everything mentioned above. And there&rsquo;s no better way to learn than to build, so let&rsquo;s get started!</p>
+
+
+<footer class=" footline" >
 	
-  
-        
-            </div> 
+</footer>
+
+
         
         </div> 
         
@@ -1033,53 +1129,6 @@
             
                 
                     
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
                     
                 
                 
@@ -1096,6 +1145,9 @@
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -1171,150 +1223,6 @@
                     
                     
 
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
                     
                         
             
@@ -1479,6 +1387,198 @@
             
         
                     
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
             
         
         
@@ -1486,10 +1586,10 @@
 
 
         
-            <a class="nav nav-prev" href="/amplify-photo-gallery-workshop/140_bonus/20_album_membership.html" title="Allowing Other Users To Collaborate In Albums"> <i class="fa fa-chevron-left"></i></a>
+            <a class="nav nav-prev" href="/amplify-photo-gallery-workshop/20_getting_started.html" title="Getting Started"> <i class="fa fa-chevron-left"></i></a>
         
         
-            <a class="nav nav-next" href="/amplify-photo-gallery-workshop/10_%EC%82%AC%EC%A0%84%EC%A4%80%EB%B9%84.html" title="사전준비" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+            <a class="nav nav-next" href="/amplify-photo-gallery-workshop/20_getting_started/20_bootstrapping_the_app.html" title="Bootstrapping the App" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
         
     </div>
 
