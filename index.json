@@ -4,14 +4,14 @@
 	"title": "AWS account 생성하기",
 	"tags": [],
 	"description": "",
-	"content": "Workshop에서 사용하고자 하는 AWS 계정은 새로운 IAM 역할을 만들수 있어야 하고 다른 IAM 권한 범위를 지정할 수 있어야 합니다.  이미 AWS 계정을 가지고 있고, IAM 관리자 접속 권한이 있다면 이 페이지를 넘어가도 좋습니다.   관리자 접속 권한 계정이 없다면: 새로 하나 만듭시다.\n AWS 계정을 가지게 되었다면, 남은 워크샵 단계를 잘 따르고 있는 확인해보세요.\nAWS 계정에 대한 관리자 권한이 있는 IAM user : 워크샵에서 사용할 IAM user를 만듭니다.\n 사용자 상세정보를 입력합니다.:  AdministratorAccess IAM 정책 연결:  create the new user 클릭:  Take note of the login URL and save:   "
+	"content": "Workshop에서 사용하고자 하는 AWS 계정은 새로운 IAM 역할을 만들수 있어야 하고 다른 IAM 권한 범위를 지정할 수 있어야 합니다.  이미 AWS 계정을 가지고 있고, IAM 관리자 접속 권한이 있다면 이 페이지를 넘어가도 좋습니다.   관리자 접속 권한 계정이 없다면: 새로 하나 만듭시다.\n AWS 계정을 가지게 되었다면, 남은 워크샵 단계를 잘 따르고 있는 확인해보세요.\nAWS 계정에 대한 관리자 권한이 있는 IAM user : 워크샵에서 사용할 IAM user를 만듭니다.\n 사용자 상세정보를 입력합니다:  AdministratorAccess IAM 정책 연결:  create the new user 클릭:  Take note of the login URL and save:   "
 },
 {
 	"uri": "https://awskrug.github.io/amplify-photo-gallery-workshop/",
 	"title": "Amplify Web App Workshop",
 	"tags": [],
 	"description": "",
-	"content": " AWS Amplify와 AWS AppSync로  사진 공유 웹 어플리케이션 구현 \n환영합니다! 이번 워크샵에서 React를 사용하여 사용자들이 사진을 업로드하고 공유하는 data-driven 기반의 안전한 사진 갤러리 웹 어플리케이션을 구현합니다. AWS AppSync를 이용하여 Amazon DynamoDB에 백업된 데이터를 GraphQL API를 통하여 빠르게 가져오고 실행합니다. AWS Amplify 라이브러리를 사용하여 사용자를 인증하고, API와 통신하며, 사진 업로드 관리를 어떻게 하는지 시연합니다. 마지막으로 Amazon Rekognition으로 AI 기반 오브젝트 태그를 추가하여 사용자가 수동으로 검색 데이터 입력하지 않아도 사진을 찾아주도록 구현합니다. "
+	"content": " AWS Amplify와 AWS AppSync로  사진 공유 웹 어플리케이션 구현 환영합니다! 이번 워크샵에서 React를 사용하여 사용자들이 사진을 업로드하고 공유하는 data-driven 기반의 안전한 사진 갤러리 웹 어플리케이션을 구현합니다. AWS AppSync를 이용하여 Amazon DynamoDB에 백업된 데이터를 GraphQL API를 통하여 빠르게 가져오고 실행합니다. AWS Amplify 라이브러리를 사용하여 사용자를 인증하고, API와 통신하며, 사진 업로드 관리를 어떻게 하는지 시연합니다. 마지막으로 Amazon Rekognition으로 AI 기반 오브젝트 태그를 추가하여 사용자가 수동으로 검색 데이터 입력하지 않아도 사진을 찾아주도록 구현합니다. "
 },
 {
 	"uri": "https://awskrug.github.io/amplify-photo-gallery-workshop/50_working_with_albums/5_managing_albums.html",
