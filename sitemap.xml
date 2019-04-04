@@ -55,19 +55,11 @@
   </url>
   
   <url>
-    <loc>https://awskrug.github.io/amplify-photo-gallery-workshop/amp/20_getting_started/20_bootstrapping_the_app.html</loc>
-  </url>
-  
-  <url>
     <loc>https://awskrug.github.io/amplify-photo-gallery-workshop/amp/130_wrapping_up/20_cleanup.html</loc>
   </url>
   
   <url>
     <loc>https://awskrug.github.io/amplify-photo-gallery-workshop/amp/70_generating_thumbnails/20_connecting_the_lambda_to_the_bucket.html</loc>
-  </url>
-  
-  <url>
-    <loc>https://awskrug.github.io/amplify-photo-gallery-workshop/20_getting_started.html</loc>
   </url>
   
   <url>
@@ -84,6 +76,14 @@
   
   <url>
     <loc>https://awskrug.github.io/amplify-photo-gallery-workshop/amp/10_%EC%82%AC%EC%A0%84%EC%A4%80%EB%B9%84/20_software.html</loc>
+  </url>
+  
+  <url>
+    <loc>https://awskrug.github.io/amplify-photo-gallery-workshop/20_getting_started.html</loc>
+  </url>
+  
+  <url>
+    <loc>https://awskrug.github.io/amplify-photo-gallery-workshop/amp/20_getting_started/20_bootstrapping_the_app.html</loc>
   </url>
   
   <url>
