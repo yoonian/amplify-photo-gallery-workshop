@@ -96,16 +96,6 @@ To build our API we&#39;ll use [AWS AppSync](https://aws.amazon.com/appsync/), a
     </item>
     
     <item>
-      <title>Setting Up the Back End</title>
-      <link>https://awskrug.github.io/amplify-photo-gallery-workshop/30_adding_auth/10_adding_auth_back.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://awskrug.github.io/amplify-photo-gallery-workshop/30_adding_auth/10_adding_auth_back.html</guid>
-      <description>Now that we have a simple React app, let&amp;rsquo;s let users sign up and sign in to our app. They won&amp;rsquo;t be able to do anything yet, but it will be helpful to have this in place so that when we add in the ability to query our backend API, we&amp;rsquo;ll know which users are accessing our system.
-The AWS Amplify CLI makes it easy for us to add cloud capabilities to our web and mobile apps, with SDKs available for React and React Native, iOS, and Android.</description>
-    </item>
-    
-    <item>
       <title>무엇을 빌드하나</title>
       <link>https://awskrug.github.io/amplify-photo-gallery-workshop/20_getting_started/10_what_we_will_build.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -117,6 +107,16 @@ The AWS Amplify CLI makes it easy for us to add cloud capabilities to our web an
  누가 무엇을 볼 수 있는가에 권한 정보, 앨범, 사진을 저장하여 API는 조회와 저장을 위한 빠르고 신뢰성있는 저장소를 갖습니다.
  사진을 저장하고 제공하며 사용자가 앨범에 업로드하는 모든 사진을 저장할 수 있습니다.
  자동으로 사진 썸네일을 작성하여 사용자가 포토 앨범 목록을 살펴볼 때에 전체 해상도의 사진을 제공하지 않습니다.</description>
+    </item>
+    
+    <item>
+      <title>백엔드 구성하기</title>
+      <link>https://awskrug.github.io/amplify-photo-gallery-workshop/30_adding_auth/10_adding_auth_back.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://awskrug.github.io/amplify-photo-gallery-workshop/30_adding_auth/10_adding_auth_back.html</guid>
+      <description>이제 우리에게 간단한 리액트 앱이 있으니, 앱으로 사용자 등록하고 로그인하도록 만들겠습니다. 지금 아무 것도 할 수 없지만 백엔드 API에 조회하는 기능을 추가하면 어떤 사용자가 우리 시스템을 사용하는지 알 수 있습니다.
+AWS Amplify CLI는 리엑트와 리엑트 네이티브용 iOS와 안드로이드에 SDK를 제공하여 웹과 모바일 앱에 클라우드 기능을 손쉽게 추가할 수 있습니다. 시작을 위해 새 애플리케이션을 만들고 사용자 인증을 가능토록 합니다. 앱에 AWS Amplify CLI로 구성하여 앱과 오픈소스 [AWS Amplify](https://aws-amplify.github.io/) 라이브러리를 연결합니다. 이제 해야 할 것은 리액트 앱에서 이것을 사용하면 됩니다.</description>
     </item>
     
     <item>
@@ -162,16 +162,6 @@ While it&amp;rsquo;s possible to perform some level of searching via DynamoDB Qu
     </item>
     
     <item>
-      <title>Rendering the Front End</title>
-      <link>https://awskrug.github.io/amplify-photo-gallery-workshop/30_adding_auth/20_adding_auth_front.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://awskrug.github.io/amplify-photo-gallery-workshop/30_adding_auth/20_adding_auth_front.html</guid>
-      <description>Now that we have our backend set up for managing registrations and sign-in, all we need to do is use the withAuthenticator higher-order React component from AWS Amplify to wrap our existing App component. This will take care of rendering a simple UI for letting users sign up, confirm their account, sign in, sign out, or reset their password.
-Adding Amplify NPM dependencies We haven&amp;rsquo;t yet added the aws-amplify and aws-amplify-react modules to our app, so let&amp;rsquo;s add them.</description>
-    </item>
-    
-    <item>
       <title>Trying Out Some Queries</title>
       <link>https://awskrug.github.io/amplify-photo-gallery-workshop/40_graphql/20_trying_out_queries.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -205,6 +195,18 @@ This area is AWS AppSync&#39;s interactive query explorer. We can write queries 
       <description>리액트(React) 앱 만들기 create-react-app CLI로 새로운 리액트 웹 앱을 제작하며 시작하겠습니다.
 이는 로컬에서 자동으로 다시 서버를 띄워주는 리액트 샘플 앱과 브라우저에서 async/await 문법, 화살표 함수 등을 지원하도록 트랜스 컴파일 기능을 제공합니다.  create-react-app은 [https://github.com/facebook/create-react-app](https://github.com/facebook/create-react-app)에서 좀 더 배울 수 있습니다.  Cloud9 터미널에서 npx create-react-app photo-albums를 실행하시고 새로 생성된 디렉토리로 이동합니다 cd photo-albums
 시멘틱 UI 리액트 추가하기 UI를 작성하기 전에 인터페이스를 좀 더 근사하게 만들수 있는 리액트의 시멘틱 UI 컴포넌트를 추가합니다.</description>
+    </item>
+    
+    <item>
+      <title>프론트엔드 렌더링</title>
+      <link>https://awskrug.github.io/amplify-photo-gallery-workshop/30_adding_auth/20_adding_auth_front.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://awskrug.github.io/amplify-photo-gallery-workshop/30_adding_auth/20_adding_auth_front.html</guid>
+      <description>이제 등록과 로그인을 관리하는 백엔드가 구성되었으니 withAuthenticator AWS Amplify의 상위 리액트 컴포넌트를 이용해서 기존 App 컴포넌트를 감싸도록 합니다. 그러면 앱에서 사용자 등록, 확인, 로그인, 로그 아웃, 비밀번호 재설정을 할 수 있는 간단한 UI를 제공합니다.
+Amplify NPM 종속성 추가 아직 aws-amplify, aws-amplify-react 모듈을 앱에 추가하지 않았으니 이제 추가합니다.
+ npm install --save aws-amplify aws-amplify-react을 실행합니다.
+ src/App.js 내용을 다음으로 교체합니다. // src/App.js  import React, { Component } from &amp;#39;react&amp;#39;; import { Header } from &amp;#39;semantic-ui-react&amp;#39;; import Amplify from &amp;#39;aws-amplify&amp;#39;; import aws_exports from &amp;#39;.</description>
     </item>
     
     <item>

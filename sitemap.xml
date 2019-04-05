@@ -39,11 +39,11 @@
   </url>
   
   <url>
-    <loc>https://awskrug.github.io/amplify-photo-gallery-workshop/amp/30_adding_auth/10_adding_auth_back.html</loc>
+    <loc>https://awskrug.github.io/amplify-photo-gallery-workshop/amp/20_getting_started/10_what_we_will_build.html</loc>
   </url>
   
   <url>
-    <loc>https://awskrug.github.io/amplify-photo-gallery-workshop/amp/20_getting_started/10_what_we_will_build.html</loc>
+    <loc>https://awskrug.github.io/amplify-photo-gallery-workshop/amp/30_adding_auth/10_adding_auth_back.html</loc>
   </url>
   
   <url>
@@ -67,10 +67,6 @@
   </url>
   
   <url>
-    <loc>https://awskrug.github.io/amplify-photo-gallery-workshop/amp/30_adding_auth/20_adding_auth_front.html</loc>
-  </url>
-  
-  <url>
     <loc>https://awskrug.github.io/amplify-photo-gallery-workshop/amp/40_graphql/20_trying_out_queries.html</loc>
   </url>
   
@@ -87,11 +83,15 @@
   </url>
   
   <url>
-    <loc>https://awskrug.github.io/amplify-photo-gallery-workshop/30_adding_auth.html</loc>
+    <loc>https://awskrug.github.io/amplify-photo-gallery-workshop/amp/30_adding_auth/20_adding_auth_front.html</loc>
   </url>
   
   <url>
     <loc>https://awskrug.github.io/amplify-photo-gallery-workshop/amp/60_managing_photos/30_adding_storage.html</loc>
+  </url>
+  
+  <url>
+    <loc>https://awskrug.github.io/amplify-photo-gallery-workshop/30_adding_auth.html</loc>
   </url>
   
   <url>
