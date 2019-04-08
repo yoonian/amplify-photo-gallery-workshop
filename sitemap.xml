@@ -19,10 +19,6 @@
   </url>
   
   <url>
-    <loc>https://awskrug.github.io/amplify-photo-gallery-workshop/amp/130_wrapping_up/10_what_we_built.html</loc>
-  </url>
-  
-  <url>
     <loc>https://awskrug.github.io/amplify-photo-gallery-workshop/amp/70_generating_thumbnails/10_creating_a_photo_processor_lambda.html</loc>
   </url>
   
@@ -51,11 +47,11 @@
   </url>
   
   <url>
-    <loc>https://awskrug.github.io/amplify-photo-gallery-workshop/amp/140_bonus/20_album_membership.html</loc>
+    <loc>https://awskrug.github.io/amplify-photo-gallery-workshop/amp/130_wrapping_up/10_what_we_built.html</loc>
   </url>
   
   <url>
-    <loc>https://awskrug.github.io/amplify-photo-gallery-workshop/amp/130_wrapping_up/20_cleanup.html</loc>
+    <loc>https://awskrug.github.io/amplify-photo-gallery-workshop/amp/140_bonus/20_album_membership.html</loc>
   </url>
   
   <url>
@@ -68,6 +64,10 @@
   
   <url>
     <loc>https://awskrug.github.io/amplify-photo-gallery-workshop/amp/40_graphql/20_trying_out_queries.html</loc>
+  </url>
+  
+  <url>
+    <loc>https://awskrug.github.io/amplify-photo-gallery-workshop/amp/130_wrapping_up/20_cleanup.html</loc>
   </url>
   
   <url>

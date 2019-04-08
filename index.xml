@@ -42,20 +42,6 @@ The Cloud9의 작업영역은 AWS root 계정이 아닌, Administrator 권한�
     </item>
     
     <item>
-      <title>Congratulations!</title>
-      <link>https://awskrug.github.io/amplify-photo-gallery-workshop/130_wrapping_up/10_what_we_built.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://awskrug.github.io/amplify-photo-gallery-workshop/130_wrapping_up/10_what_we_built.html</guid>
-      <description>While no application is really ever done, we&amp;rsquo;ve certainly come a long way toward building a shareable photo albums web app!
-Here&amp;rsquo;s a reminder of everything we accomplished. We:
- Started with a simple React web app
- Added user authentication with a complete sign up and sign in flow
- Created a GraphQL API to securely manage photo albums backed by DynamoDB tables
- Added the ability to create and view albums</description>
-    </item>
-    
-    <item>
       <title>Creating a Photo Processor Lambda function</title>
       <link>https://awskrug.github.io/amplify-photo-gallery-workshop/70_generating_thumbnails/10_creating_a_photo_processor_lambda.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -120,6 +106,23 @@ AWS Amplify CLI는 리엑트와 리엑트 네이티브용 iOS와 안드로이드
     </item>
     
     <item>
+      <title>축하드립니다!</title>
+      <link>https://awskrug.github.io/amplify-photo-gallery-workshop/130_wrapping_up/10_what_we_built.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://awskrug.github.io/amplify-photo-gallery-workshop/130_wrapping_up/10_what_we_built.html</guid>
+      <description>실제로 상용할 어플리케이션을 만들진 않았지만, 간단하게 공유가능한 앨범 웹 앱을 만들어보았습니다.
+우리가 완료한 내용들을 다음 리스트에서 확인해보겠습니다. 우리는 :
+ 간단한 리엑트(React) 웹 앱으로 시작했습니다.
+ 사용자인증 추가로 완벽한 회원가입 및 로그인을 구현하였습니다.
+ DynamoDB 테이블에 적재될 사진 앨범들이 안전하게 관리되도록 AWS AppSync의 GraphQL API를 이용했습니다.
+ 앨범추가 및 보기기능을 추가하였습니다.
+ 앨범에 사진들을 업로드하고 썸네일 자동생성을 완료하였습니다.
+ 사진이 많은 앨범의 &amp;ldquo;더보기&amp;rdquo;와 같이 페이지매김을 도입하였습니다.
+ Amazon Rekognition API를 이용한 사진의 자동라벨 감지기능 추가하였습니다.</description>
+    </item>
+    
+    <item>
       <title>Allowing Other Users To Collaborate In Albums</title>
       <link>https://awskrug.github.io/amplify-photo-gallery-workshop/140_bonus/20_album_membership.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -128,17 +131,6 @@ AWS Amplify CLI는 리엑트와 리엑트 네이티브용 iOS와 안드로이드
       <description>We can take advantage of the fact that multiple users can sign in to our app and add the ability for other people view and upload to our albums on a case-by-case basis.
 The simplest way to do this is to have each album contain a set of usernames that are allowed to view and upload photos to it. Let&amp;rsquo;s see how we can make this work.
 Updating the backend Amplify supports multiple authorization declarations on the @model types in our GraphQL Schema.</description>
-    </item>
-    
-    <item>
-      <title>Cleaning Up</title>
-      <link>https://awskrug.github.io/amplify-photo-gallery-workshop/130_wrapping_up/20_cleanup.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://awskrug.github.io/amplify-photo-gallery-workshop/130_wrapping_up/20_cleanup.html</guid>
-      <description>Deleting via Amplify Amplify can do a pretty good job of removing most of the cloud resources we&amp;rsquo;ve provisioned for this workshop (just by attempting to delete the CloudFormation nested stack it provisioned). However, it will refuse to delete a few items, which we&amp;rsquo;ll manually take care of as well.
- From the photo-albums directory, run: amplify delete and press Enter to confirm the deletion.
- Wait a few minutes while Amplify deletes most of our resources.</description>
     </item>
     
     <item>
@@ -173,6 +165,18 @@ While it&amp;rsquo;s possible to perform some level of searching via DynamoDB Qu
  
 Click Queries in the sidebar on the left.
 This area is AWS AppSync&#39;s interactive query explorer. We can write queries and mutations here, execute them, and see the results. It&#39;s a great way to test things out to make sure our resolvers are working the way we expect.</description>
+    </item>
+    
+    <item>
+      <title>리소스 삭제하기</title>
+      <link>https://awskrug.github.io/amplify-photo-gallery-workshop/130_wrapping_up/20_cleanup.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://awskrug.github.io/amplify-photo-gallery-workshop/130_wrapping_up/20_cleanup.html</guid>
+      <description>Amplify로 삭제하기 Amplify는 우리가 이번 워크샵에서 프로비저닝했던 모든 리소스들을 삭제할 수 있는 작업을 할 수 있습니다 (프로비저닝된 CloudFormation 중첩스택을 삭제하는 작업을 시도합니다). 그러나 몇가지 리소스들은 삭제거부가 되므로, 수동으로 삭제해줍니다.
+ photo-albums 디렉토리에서 amplify delete를 실행하고 삭제를 확인하기 위해 *Enter*키를 누릅니다.
+ Amplify가 리소스들을 삭제하는 동안 기다립니다.
+  수동으로 일부 삭제하기 이제 CloudFormation stacks console로 이동해서 &amp;lsquo;DELETE FAILED&amp;rsquo;상태표시를 나타내는 몇개의 스택들을 클릭합니다. 귀하께서는 삭제실패된 원인과 무엇이 실패되었는지를 보실 수 있습니다.</description>
     </item>
     
     <item>
