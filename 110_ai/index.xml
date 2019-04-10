@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Adding AI on Amplify / AppSync / React Workshop</title>
+    <title>AI 추가하기 on Amplify / AppSync / React Workshop</title>
     <link>https://awskrug.github.io/amplify-photo-gallery-workshop/110_ai.html</link>
-    <description>Recent content in Adding AI on Amplify / AppSync / React Workshop</description>
+    <description>Recent content in AI 추가하기 on Amplify / AppSync / React Workshop</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-kr</language>
     
@@ -11,34 +11,35 @@
     
     
     <item>
-      <title>Integrating Amazon Rekognition</title>
+      <title>Amazon Rekognition 연동하기</title>
       <link>https://awskrug.github.io/amplify-photo-gallery-workshop/110_ai/10_rekognition.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://awskrug.github.io/amplify-photo-gallery-workshop/110_ai/10_rekognition.html</guid>
-      <description>It would be great if we could find images without having to manually tag them with descriptions of their contents. Luckily, adding this feature is pretty easy thanks to Amazon Rekognition. We can use the DetectLabels API &amp;ndash; if we give it a photo, it will respond with a list of appropriate labels for the image. Perfect!
-**Amazon Rekognition&#39;s DetectLabels Quick Summary**  You pass the input image as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket.</description>
+      <description>직접 태깅하지 않은 이미지도 검색할 수 있으면 좋겠습니다. 다행이 Amazon Rekognition 덕분에 이 기능을 추가하기는 매우 쉽습니다. 사진을 주면 해당 이미지에 적절한 레이블로 응답하는 DetectLabels API를 사용할 수 있습니다. 완벽합니다!
+**Amazon Rekognition의 DetectLabels 간략 정리**  입력한 이미지를 base64 인코딩한 이미지 바이트열이나 Amazon S3 버킷에 이미지 참조로 전달합니다. AWS CLI로 Amazon Rekognition 작업을 호출하는 경우 이미지 바이트열을 전달하는 기능은 지원하지 않습니다. 이미지는 PNG 또는 JPEG 형식의 파일이어야 합니다.  API는 각 개체와 장면과 컨셉에 따라 하나 이상의 레이블을 반환합니다.</description>
     </item>
     
     <item>
-      <title>Making Photos Searchable</title>
+      <title>사진을 검색할 수 있게 만들기</title>
       <link>https://awskrug.github.io/amplify-photo-gallery-workshop/110_ai/20_prep_for_searching.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://awskrug.github.io/amplify-photo-gallery-workshop/110_ai/20_prep_for_searching.html</guid>
-      <description>Updating the GraphQL Schema Now that we are storing labels for each photo, we&amp;rsquo;re ready to move on and expose this data via our AppSync API.
-While it&amp;rsquo;s possible to perform some level of searching via DynamoDB Query operations, a more flexible and performant approach is to use the Amazon Elasticsearch Service to index data and handle our search queries. Fortunately, the Amplify CLI makes creating an Amazon Elasticsearch Service endpoint, and connecting it to our app&amp;rsquo;s data, very easy.</description>
+      <description>GraphQL 스키마 갱신하기 이제 각 사진의 레이블을 저장할 수 있으니, AppSync API를 통해 이 데이터를 노출할 준비가 되었습니다.
+DynamoDB 쿼리로 검색하는 방법도 가능하지만, Amazon Elasticsearch Service를 사용하여 데이터를 색인하고 검색 쿼리를 다루는 방식이 좀 더 유연하고 효율적입니다. 다행이 Amplify CLI는 매우 쉽게 Amazon Elasticsearch 엔드포인트를 생성하고 앱 데이터와 연결합니다.
+ photo-albums/amplify/backend/api/photoalbums/schema.graphql 을 다음 내용으로 변경합니다. # amplify/backend/api/photo-albums/schema.graphql type Album @model @auth(rules: [{allow: owner}]) { id: ID! name: String! photos: [Photo] @connection(name: &amp;#34;AlbumPhotos&amp;#34;) } type Photo @model @auth(rules: [{allow: owner}]) @searchable {  id: ID!</description>
     </item>
     
     <item>
-      <title>Searching Photos By Label</title>
+      <title>사진을 레이블로 검색하기</title>
       <link>https://awskrug.github.io/amplify-photo-gallery-workshop/110_ai/40_searching_for_labels.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://awskrug.github.io/amplify-photo-gallery-workshop/110_ai/40_searching_for_labels.html</guid>
-      <description>With all of the back-end work completed, now we just need to update our web app to allow searching for photos by label.
-Let&amp;rsquo;s create a new Search component and add it to the App component to be rendered on the root path. For rendering all of the matching photos in the Search component, we&amp;rsquo;ll re-use the PhotosList component we already created.
-Replace photo-albums/src/App.js with the following: // photo-albums/src/App.js  import React, { Component } from &amp;#39;react&amp;#39;; import {BrowserRouter as Router, Route, NavLink} from &amp;#39;react-router-dom&amp;#39;; import { Divider, Form, Grid, Header, Input, List, Segment } from &amp;#39;semantic-ui-react&amp;#39;; import {v4 as uuid} from &amp;#39;uuid&amp;#39;; import { Connect, S3Image, withAuthenticator } from &amp;#39;aws-amplify-react&amp;#39;; import Amplify, { API, graphqlOperation, Storage } from &amp;#39;aws-amplify&amp;#39;; import aws_exports from &amp;#39;.</description>
+      <description>백엔드 작업이 완료되었으니 이제 사진을 레이블로 검색할 수 있게 하겠습니다.
+새 Search 컴포넌트를 생성하고 App 컴포넌트에 루트 경로로 표시되도록 추가합니다. Search 컴포넌트에서 검색된 모든 사진을 표시하기위해 이미 생성한 PhotoList 컴포넌트를 재사용합니다.
+photo-albums/src/App.js을 다음 내용으로 변경합니다. // photo-albums/src/App.js  import React, { Component } from &amp;#39;react&amp;#39;; import {BrowserRouter as Router, Route, NavLink} from &amp;#39;react-router-dom&amp;#39;; import { Divider, Form, Grid, Header, Input, List, Segment } from &amp;#39;semantic-ui-react&amp;#39;; import {v4 as uuid} from &amp;#39;uuid&amp;#39;; import { Connect, S3Image, withAuthenticator } from &amp;#39;aws-amplify-react&amp;#39;; import Amplify, { API, graphqlOperation, Storage } from &amp;#39;aws-amplify&amp;#39;; import aws_exports from &amp;#39;.</description>
     </item>
     
   </channel>

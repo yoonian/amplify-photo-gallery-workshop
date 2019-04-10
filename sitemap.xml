@@ -15,6 +15,10 @@
   </url>
   
   <url>
+    <loc>https://awskrug.github.io/amplify-photo-gallery-workshop/amp/110_ai/10_rekognition.html</loc>
+  </url>
+  
+  <url>
     <loc>https://awskrug.github.io/amplify-photo-gallery-workshop/amp/40_graphql/10_setting_up_appsync.html</loc>
   </url>
   
@@ -24,10 +28,6 @@
   
   <url>
     <loc>https://awskrug.github.io/amplify-photo-gallery-workshop/amp/70_generating_thumbnails/10_creating_a_photo_processor_lambda.html</loc>
-  </url>
-  
-  <url>
-    <loc>https://awskrug.github.io/amplify-photo-gallery-workshop/amp/110_ai/10_rekognition.html</loc>
   </url>
   
   <url>
@@ -59,15 +59,15 @@
   </url>
   
   <url>
-    <loc>https://awskrug.github.io/amplify-photo-gallery-workshop/amp/110_ai/20_prep_for_searching.html</loc>
-  </url>
-  
-  <url>
     <loc>https://awskrug.github.io/amplify-photo-gallery-workshop/amp/40_graphql/20_trying_out_queries.html</loc>
   </url>
   
   <url>
     <loc>https://awskrug.github.io/amplify-photo-gallery-workshop/amp/130_wrapping_up/20_cleanup.html</loc>
+  </url>
+  
+  <url>
+    <loc>https://awskrug.github.io/amplify-photo-gallery-workshop/amp/110_ai/20_prep_for_searching.html</loc>
   </url>
   
   <url>

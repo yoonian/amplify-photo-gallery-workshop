@@ -8,33 +8,33 @@
     <meta property="og:url" content="https://amplify-workshop.go-aws.com" />
     <meta property="og:image" content="https://amplify-workshop.go-aws.com/images/architecture.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta name="generator" content="Hugo 0.55.0-DEV" />
+    <meta name="generator" content="Hugo 0.56.0-DEV" />
     <meta name="description" content="Amplify / AppSync / React Workshop">
 <meta name="author" content="Gabe Hollombe">
 
     <link rel="shortcut icon" href="https://awskrug.github.io/amplify-photo-gallery-workshop/images/favicon.png" type="image/x-icon" />
 <link rel="icon" href="https://awskrug.github.io/amplify-photo-gallery-workshop/images/favicon.png" type="image/x-icon" />
-    <title>Integrating Amazon Rekognition :: Amplify / AppSync / React Workshop</title>
+    <title>Amazon Rekognition 연동하기 :: Amplify / AppSync / React Workshop</title>
 
     
-    <link href="https://awskrug.github.io/amplify-photo-gallery-workshop/css/nucleus.css?1554732696" rel="stylesheet">
+    <link href="https://awskrug.github.io/amplify-photo-gallery-workshop/css/nucleus.css?1554887666" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-    <link href="https://awskrug.github.io/amplify-photo-gallery-workshop/css/hybrid.css?1554732696" rel="stylesheet">
-    <link href="https://awskrug.github.io/amplify-photo-gallery-workshop/css/featherlight.min.css?1554732696" rel="stylesheet">
-    <link href="https://awskrug.github.io/amplify-photo-gallery-workshop/css/perfect-scrollbar.min.css?1554732696" rel="stylesheet">
-    <link href="https://awskrug.github.io/amplify-photo-gallery-workshop/css/auto-complete.css?1554732696" rel="stylesheet">
-    <link href="https://awskrug.github.io/amplify-photo-gallery-workshop/css/theme.css?1554732696" rel="stylesheet">
-    <link href="https://awskrug.github.io/amplify-photo-gallery-workshop/css/hugo-theme.css?1554732696" rel="stylesheet">
+    <link href="https://awskrug.github.io/amplify-photo-gallery-workshop/css/hybrid.css?1554887666" rel="stylesheet">
+    <link href="https://awskrug.github.io/amplify-photo-gallery-workshop/css/featherlight.min.css?1554887666" rel="stylesheet">
+    <link href="https://awskrug.github.io/amplify-photo-gallery-workshop/css/perfect-scrollbar.min.css?1554887666" rel="stylesheet">
+    <link href="https://awskrug.github.io/amplify-photo-gallery-workshop/css/auto-complete.css?1554887666" rel="stylesheet">
+    <link href="https://awskrug.github.io/amplify-photo-gallery-workshop/css/theme.css?1554887666" rel="stylesheet">
+    <link href="https://awskrug.github.io/amplify-photo-gallery-workshop/css/hugo-theme.css?1554887666" rel="stylesheet">
     
-      <link href="https://awskrug.github.io/amplify-photo-gallery-workshop/css/theme-mine.css?1554732696" rel="stylesheet">
+      <link href="https://awskrug.github.io/amplify-photo-gallery-workshop/css/theme-mine.css?1554887666" rel="stylesheet">
     
 
-    <link href="https://awskrug.github.io/amplify-photo-gallery-workshop/css/jquery-ui.min.css?1554732696" rel="stylesheet">
-    <link href="https://awskrug.github.io/amplify-photo-gallery-workshop/css/jquery-ui.structure.min.css?1554732696" rel="stylesheet">
-    <link href="https://awskrug.github.io/amplify-photo-gallery-workshop/css/jquery-ui.theme.min.css?1554732696" rel="stylesheet">
-    <script src="https://awskrug.github.io/amplify-photo-gallery-workshop/js/jquery-2.x.min.js?1554732696"></script>
-    <script src="https://awskrug.github.io/amplify-photo-gallery-workshop/js/jquery-ui.min.js?1554732696"></script>
-    <script src="https://awskrug.github.io/amplify-photo-gallery-workshop/js/tabs.js?1554732696"></script>
+    <link href="https://awskrug.github.io/amplify-photo-gallery-workshop/css/jquery-ui.min.css?1554887666" rel="stylesheet">
+    <link href="https://awskrug.github.io/amplify-photo-gallery-workshop/css/jquery-ui.structure.min.css?1554887666" rel="stylesheet">
+    <link href="https://awskrug.github.io/amplify-photo-gallery-workshop/css/jquery-ui.theme.min.css?1554887666" rel="stylesheet">
+    <script src="https://awskrug.github.io/amplify-photo-gallery-workshop/js/jquery-2.x.min.js?1554887666"></script>
+    <script src="https://awskrug.github.io/amplify-photo-gallery-workshop/js/jquery-ui.min.js?1554887666"></script>
+    <script src="https://awskrug.github.io/amplify-photo-gallery-workshop/js/tabs.js?1554887666"></script>
 
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{
@@ -61,14 +61,14 @@
     <span data-search-clear=""><i class="fa fa-close"></i></span>
 </div>
 
-<script type="text/javascript" src="https://awskrug.github.io/amplify-photo-gallery-workshop/js/lunr.min.js?1554732696"></script>
-<script type="text/javascript" src="https://awskrug.github.io/amplify-photo-gallery-workshop/js/auto-complete.js?1554732696"></script>
+<script type="text/javascript" src="https://awskrug.github.io/amplify-photo-gallery-workshop/js/lunr.min.js?1554887666"></script>
+<script type="text/javascript" src="https://awskrug.github.io/amplify-photo-gallery-workshop/js/auto-complete.js?1554887666"></script>
 <script type="text/javascript">
     
         var baseurl = '\/';
     
 </script>
-<script type="text/javascript" src="https://awskrug.github.io/amplify-photo-gallery-workshop/js/search.js?1554732696"></script>
+<script type="text/javascript" src="https://awskrug.github.io/amplify-photo-gallery-workshop/js/search.js?1554887666"></script>
 
     
   </div>
@@ -574,13 +574,13 @@
  
   
     
-    <li data-nav-id="/110_ai.html" title="Adding AI" class="dd-item 
+    <li data-nav-id="/110_ai.html" title="AI 추가하기" class="dd-item 
         parent
         
         
         ">
       <a href="https://awskrug.github.io/amplify-photo-gallery-workshop/110_ai.html">
-          Adding AI
+          AI 추가하기
           
       </a>
       
@@ -599,9 +599,9 @@
  
   
     
-      <li data-nav-id="/amp/110_ai/10_rekognition.html" title="Integrating Amazon Rekognition" class="dd-item active">
+      <li data-nav-id="/amp/110_ai/10_rekognition.html" title="Amazon Rekognition 연동하기" class="dd-item active">
         <a href="https://awskrug.github.io/amplify-photo-gallery-workshop/amp/110_ai/10_rekognition.html">
-        Integrating Amazon Rekognition
+        Amazon Rekognition 연동하기
         
         </a>
     </li>
@@ -618,9 +618,9 @@
  
   
     
-      <li data-nav-id="/amp/110_ai/20_prep_for_searching.html" title="Making Photos Searchable" class="dd-item ">
+      <li data-nav-id="/amp/110_ai/20_prep_for_searching.html" title="사진을 검색할 수 있게 만들기" class="dd-item ">
         <a href="https://awskrug.github.io/amplify-photo-gallery-workshop/amp/110_ai/20_prep_for_searching.html">
-        Making Photos Searchable
+        사진을 검색할 수 있게 만들기
         
         </a>
     </li>
@@ -637,9 +637,9 @@
  
   
     
-      <li data-nav-id="/amp/110_ai/40_searching_for_labels.html" title="Searching Photos By Label" class="dd-item ">
+      <li data-nav-id="/amp/110_ai/40_searching_for_labels.html" title="사진을 레이블로 검색하기" class="dd-item ">
         <a href="https://awskrug.github.io/amplify-photo-gallery-workshop/amp/110_ai/40_searching_for_labels.html">
-        Searching Photos By Label
+        사진을 레이블로 검색하기
         
         </a>
     </li>
@@ -918,7 +918,7 @@
             
           
           
-            <a href='https://awskrug.github.io/amplify-photo-gallery-workshop/amp/'>Amplify Web App Workshop</a> > <a href='https://awskrug.github.io/amplify-photo-gallery-workshop/110_ai.html'>Adding AI</a> > Integrating Amazon Rekognition
+            <a href='https://awskrug.github.io/amplify-photo-gallery-workshop/amp/'>Amplify Web App Workshop</a> > <a href='https://awskrug.github.io/amplify-photo-gallery-workshop/110_ai.html'>AI 추가하기</a> > Amazon Rekognition 연동하기
           
         
           
@@ -938,10 +938,10 @@
 <ul>
 <li>
 <ul>
-<li><a href="#integrating-rekognition-with-the-photo-processor-lambda">Integrating Rekognition with the Photo Processor Lambda</a></li>
+<li><a href="#rekognition과-사진-처리-람다-연동하기">Rekognition과 사진 처리 람다 연동하기</a></li>
 </ul></li>
-<li><a href="#what-we-changed">What we changed</a></li>
-<li><a href="#re-deploying-the-photo-processor-lambda">Re-deploying the Photo Processor Lambda</a></li>
+<li><a href="#바뀐-것들">바뀐 것들</a></li>
+<li><a href="#사진-처리-람다를-재배포하기">사진 처리 람다를 재배포하기</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -957,7 +957,7 @@
         
         <div id="body-inner">
           
-            <h1>Integrating Amazon Rekognition</h1>
+            <h1>Amazon Rekognition 연동하기</h1>
           
 
         
@@ -965,14 +965,14 @@
 
 
 
-<p>It would be great if we could find images without having to manually tag them with descriptions of their contents. Luckily, adding this feature is pretty easy thanks to <a href="https://aws.amazon.com/rekognition/image-features/" target="_blank">Amazon Rekognition</a>. We can use the <a href="https://docs.aws.amazon.com/rekognition/latest/dg/API_DetectLabels.html" target="_blank">DetectLabels API</a> &ndash; if we give it a photo, it will respond with a list of appropriate labels for the image. Perfect!</p>
+<p>직접 태깅하지 않은 이미지도 검색할 수 있으면 좋겠습니다. 다행이 <a href="https://aws.amazon.com/rekognition/image-features/" target="_blank">Amazon Rekognition</a> 덕분에 이 기능을 추가하기는 매우 쉽습니다. 사진을 주면 해당 이미지에 적절한 레이블로 응답하는 <a href="https://docs.aws.amazon.com/rekognition/latest/dg/API_DetectLabels.html" target="_blank">DetectLabels API</a>를 사용할 수 있습니다. 완벽합니다!</p>
 
 <div class="notices info" >
-**Amazon Rekognition's DetectLabels Quick Summary**
+**Amazon Rekognition의 DetectLabels 간략 정리**
 <br/><br/>
-You pass the input image as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file.
+입력한 이미지를 base64 인코딩한 이미지 바이트열이나 Amazon S3 버킷에 이미지 참조로 전달합니다. AWS CLI로 Amazon Rekognition 작업을 호출하는 경우 이미지 바이트열을 전달하는 기능은 지원하지 않습니다. 이미지는 PNG 또는 JPEG 형식의 파일이어야 합니다.
 <br/><br/>
-For each object, scene, and concept the API returns one or more labels. Each label provides the object name, and the level of confidence that the image contains the object. For example, suppose the input image has a lighthouse, the sea, and a rock. The response includes all three labels, one for each object.
+API는 각 개체와 장면과 컨셉에 따라 하나 이상의 레이블을 반환합니다. 각 레이블은 이미지에 포함된 개체의 이름과 신뢰도 수준 정보를 제공합니다. 예를 들어 입력 이미지에 등대, 바다, 바위가 있다고 가정해봅니다. 그 응답에는 각 개체당 1개씩 3개의 모든 레이블을 포함합니다.
 <br/><br/>
 {Name: lighthouse, Confidence: 98.4629}
 <br/>
@@ -981,11 +981,11 @@ For each object, scene, and concept the API returns one or more labels. Each lab
 {Name: sea,Confidence: 75.061}
 </div>
 
-<h4 id="integrating-rekognition-with-the-photo-processor-lambda">Integrating Rekognition with the Photo Processor Lambda</h4>
+<h4 id="rekognition과-사진-처리-람다-연동하기">Rekognition과 사진 처리 람다 연동하기</h4>
 
-<p>Let&rsquo;s add Amazon Rekognition integration in to our photo_processor lambda function.</p>
+<p>photo_processor 람다 함수에 Amazon Rekognition을 연동하겠습니다.</p>
 
-<p><strong>Replace amplify/backend/function/workshopphotoprocessor/src/index.js</strong> with the following version:</p>
+<p><strong>amplify/backend/function/workshopphotoprocessor/src/index.js</strong>를 다음 버전으로 변경합니다.</p>
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// photo-albums/amplify/backend/function/workshopphotoprocessor/src/index.js
 </span><span style="color:#75715e"></span>
@@ -1127,23 +1127,23 @@ For each object, scene, and concept the API returns one or more labels. Each lab
 };
 </code></pre></div>
 
-<h3 id="what-we-changed">What we changed</h3>
+<h3 id="바뀐-것들">바뀐 것들</h3>
 
 <ul>
-<li><p>Created an instance of <em>AWS.Rekognition</em> to interact with the Amazon Rekognition API</p></li>
+<li><p>Amazon Rekognition API를 이용하기 위해 <em>AWS.Recognition</em> 인스턴스를 생성했습니다.</p></li>
 
-<li><p>Added the <em>getLabelNames</em> function to use <em>Rekognition.detectLabels</em> to return a list of appropriate labels for a given photo on S3</p></li>
+<li><p><em>Rekognition.detectLabels</em> 을 이용하여 주어진 S3의 사진을 위한 적절한 레이블의 목록을 돌려주는 <em>getLabelNames</em> 함수가 추가되었습니다.</p></li>
 
-<li><p>Updated the <em>processPrcord</em> function to use the <em>getLabelNames</em> function to get labels for the photo and include them in the item record it persists to DynamoDB</p></li>
+<li><p><em>getLabelNames</em> 함수를 이용하여 사진 레이블을 가지고 와서, DynamoDB에 해당 기록과 함께 저장되도록 <em>processRecord</em> 함수를 수정했습니다.</p></li>
 </ul>
 
-<p>Our Photo Processor code now uses Amazon Rekognition&rsquo;s detectLabels API. But because we already added permissions for this action in the previous section, we won&rsquo;t need to update the CloudFormation template again.</p>
+<p>사진 처리기 코드는 이제 Amazon Rekognition의 detectLables API를 사용합니다. 그러나 이전 장에서 이 작업에 대한 권한을 이미 추가했기때문에 CloudFormation 템플릿을 다시 갱신할 필요는 없습니다.</p>
 
-<h3 id="re-deploying-the-photo-processor-lambda">Re-deploying the Photo Processor Lambda</h3>
+<h3 id="사진-처리-람다를-재배포하기">사진 처리 람다를 재배포하기</h3>
 
-<p><strong>From the photo-albums directory, run:</strong> <code>amplify push</code> to deploy an updated version of the Photo Processor function.</p>
+<p><strong>photo-albums 디렉토리에서</strong> <code>amplify push</code>를 실행해서 갱신된 버전의 사진 처리 함수를 배포합니다.</p>
 
-<p>After the deploy finishes, try adding a new photo to an album. Then, go look at its row in the PhotoTable in DynamoDB and see if you see a labels property for the new upload. Hopefully you see some relevant labels for the photo!</p>
+<p>배포가 끝나면 새 사진을 앨범에 추가해 봅니다. 그리고 DynamoDB의 PhotoTable에 해당 행을 찾아보아서 새로 업로드한 것에 적절히 레이블이 주어졌는지 확인해 봅니다. 바라기는 해당 사진과 관련있는 레이블을 볼 것입니다.</p>
 
 
 <footer class=" footline" >
@@ -1719,10 +1719,10 @@ For each object, scene, and concept the API returns one or more labels. Each lab
 
 
         
-            <a class="nav nav-prev" href="https://awskrug.github.io/amplify-photo-gallery-workshop/110_ai.html" title="Adding AI"> <i class="fa fa-chevron-left"></i></a>
+            <a class="nav nav-prev" href="https://awskrug.github.io/amplify-photo-gallery-workshop/110_ai.html" title="AI 추가하기"> <i class="fa fa-chevron-left"></i></a>
         
         
-            <a class="nav nav-next" href="https://awskrug.github.io/amplify-photo-gallery-workshop/amp/110_ai/20_prep_for_searching.html" title="Making Photos Searchable" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+            <a class="nav nav-next" href="https://awskrug.github.io/amplify-photo-gallery-workshop/amp/110_ai/20_prep_for_searching.html" title="사진을 검색할 수 있게 만들기" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
         
     </div>
 
@@ -1731,20 +1731,20 @@ For each object, scene, and concept the API returns one or more labels. Each lab
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="https://awskrug.github.io/amplify-photo-gallery-workshop/js/clipboard.min.js?1554732696"></script>
-    <script src="https://awskrug.github.io/amplify-photo-gallery-workshop/js/perfect-scrollbar.min.js?1554732696"></script>
-    <script src="https://awskrug.github.io/amplify-photo-gallery-workshop/js/perfect-scrollbar.jquery.min.js?1554732696"></script>
-    <script src="https://awskrug.github.io/amplify-photo-gallery-workshop/js/jquery.sticky.js?1554732696"></script>
-    <script src="https://awskrug.github.io/amplify-photo-gallery-workshop/js/featherlight.min.js?1554732696"></script>
-    <script src="https://awskrug.github.io/amplify-photo-gallery-workshop/js/html5shiv-printshiv.min.js?1554732696"></script>
-    <script src="https://awskrug.github.io/amplify-photo-gallery-workshop/js/highlight.pack.js?1554732696"></script>
+    <script src="https://awskrug.github.io/amplify-photo-gallery-workshop/js/clipboard.min.js?1554887666"></script>
+    <script src="https://awskrug.github.io/amplify-photo-gallery-workshop/js/perfect-scrollbar.min.js?1554887666"></script>
+    <script src="https://awskrug.github.io/amplify-photo-gallery-workshop/js/perfect-scrollbar.jquery.min.js?1554887666"></script>
+    <script src="https://awskrug.github.io/amplify-photo-gallery-workshop/js/jquery.sticky.js?1554887666"></script>
+    <script src="https://awskrug.github.io/amplify-photo-gallery-workshop/js/featherlight.min.js?1554887666"></script>
+    <script src="https://awskrug.github.io/amplify-photo-gallery-workshop/js/html5shiv-printshiv.min.js?1554887666"></script>
+    <script src="https://awskrug.github.io/amplify-photo-gallery-workshop/js/highlight.pack.js?1554887666"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="https://awskrug.github.io/amplify-photo-gallery-workshop/js/modernizr.custom.71422.js?1554732696"></script>
-    <script src="https://awskrug.github.io/amplify-photo-gallery-workshop/js/learn.js?1554732696"></script>
-    <script src="https://awskrug.github.io/amplify-photo-gallery-workshop/js/hugo-learn.js?1554732696"></script>
+    <script src="https://awskrug.github.io/amplify-photo-gallery-workshop/js/modernizr.custom.71422.js?1554887666"></script>
+    <script src="https://awskrug.github.io/amplify-photo-gallery-workshop/js/learn.js?1554887666"></script>
+    <script src="https://awskrug.github.io/amplify-photo-gallery-workshop/js/hugo-learn.js?1554887666"></script>
 
-    <link href="https://awskrug.github.io/amplify-photo-gallery-workshop/mermaid/mermaid.css?1554732696" type="text/css" rel="stylesheet" />
-    <script src="https://awskrug.github.io/amplify-photo-gallery-workshop/mermaid/mermaid.js?1554732696"></script>
+    <link href="https://awskrug.github.io/amplify-photo-gallery-workshop/mermaid/mermaid.css?1554887666" type="text/css" rel="stylesheet" />
+    <script src="https://awskrug.github.io/amplify-photo-gallery-workshop/mermaid/mermaid.js?1554887666"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

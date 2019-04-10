@@ -32,6 +32,16 @@ As we saw above, [AWS Amplify](https://aws.github.io/aws-amplify/) is an open so
     </item>
     
     <item>
+      <title>Amazon Rekognition 연동하기</title>
+      <link>https://awskrug.github.io/amplify-photo-gallery-workshop/110_ai/10_rekognition.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://awskrug.github.io/amplify-photo-gallery-workshop/110_ai/10_rekognition.html</guid>
+      <description>직접 태깅하지 않은 이미지도 검색할 수 있으면 좋겠습니다. 다행이 Amazon Rekognition 덕분에 이 기능을 추가하기는 매우 쉽습니다. 사진을 주면 해당 이미지에 적절한 레이블로 응답하는 DetectLabels API를 사용할 수 있습니다. 완벽합니다!
+**Amazon Rekognition의 DetectLabels 간략 정리**  입력한 이미지를 base64 인코딩한 이미지 바이트열이나 Amazon S3 버킷에 이미지 참조로 전달합니다. AWS CLI로 Amazon Rekognition 작업을 호출하는 경우 이미지 바이트열을 전달하는 기능은 지원하지 않습니다. 이미지는 PNG 또는 JPEG 형식의 파일이어야 합니다.  API는 각 개체와 장면과 컨셉에 따라 하나 이상의 레이블을 반환합니다.</description>
+    </item>
+    
+    <item>
       <title>AppSync 세팅</title>
       <link>https://awskrug.github.io/amplify-photo-gallery-workshop/40_graphql/10_setting_up_appsync.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -59,16 +69,6 @@ The Cloud9의 작업영역은 AWS root 계정이 아닌, Administrator 권한�
       <guid>https://awskrug.github.io/amplify-photo-gallery-workshop/70_generating_thumbnails/10_creating_a_photo_processor_lambda.html</guid>
       <description>Let&amp;rsquo;s make a photo processor lambda function so that we can resize our photos.
 When following the instructions below, **you must name your lambda function _workshopphotoprocessor_**.   Later, we&#39;ll edit some CloudFormation templates, and the function name **workshopphotoprocessor** is hard coded to make it easier for this workshop (less edits that you&#39;ll have to do).   From the photo-albums directory, run: amplify function add and respond to the prompts the same way as shown below.</description>
-    </item>
-    
-    <item>
-      <title>Integrating Amazon Rekognition</title>
-      <link>https://awskrug.github.io/amplify-photo-gallery-workshop/110_ai/10_rekognition.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://awskrug.github.io/amplify-photo-gallery-workshop/110_ai/10_rekognition.html</guid>
-      <description>It would be great if we could find images without having to manually tag them with descriptions of their contents. Luckily, adding this feature is pretty easy thanks to Amazon Rekognition. We can use the DetectLabels API &amp;ndash; if we give it a photo, it will respond with a list of appropriate labels for the image. Perfect!
-**Amazon Rekognition&#39;s DetectLabels Quick Summary**  You pass the input image as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket.</description>
     </item>
     
     <item>
@@ -144,16 +144,6 @@ Updating the backend Amplify supports multiple authorization declarations on the
     </item>
     
     <item>
-      <title>Making Photos Searchable</title>
-      <link>https://awskrug.github.io/amplify-photo-gallery-workshop/110_ai/20_prep_for_searching.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://awskrug.github.io/amplify-photo-gallery-workshop/110_ai/20_prep_for_searching.html</guid>
-      <description>Updating the GraphQL Schema Now that we are storing labels for each photo, we&amp;rsquo;re ready to move on and expose this data via our AppSync API.
-While it&amp;rsquo;s possible to perform some level of searching via DynamoDB Query operations, a more flexible and performant approach is to use the Amazon Elasticsearch Service to index data and handle our search queries. Fortunately, the Amplify CLI makes creating an Amazon Elasticsearch Service endpoint, and connecting it to our app&amp;rsquo;s data, very easy.</description>
-    </item>
-    
-    <item>
       <title>Querie 수행하기</title>
       <link>https://awskrug.github.io/amplify-photo-gallery-workshop/40_graphql/20_trying_out_queries.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -177,6 +167,17 @@ AWS AppSync의 대화형 쿼리 실행 영역인 이곳에서 쿼리를 작성�
  photo-albums 디렉토리에서 amplify delete를 실행하고 삭제를 확인하기 위해 *Enter*키를 누릅니다.
  Amplify가 리소스들을 삭제하는 동안 기다립니다.
   수동으로 일부 삭제하기 이제 CloudFormation stacks console로 이동해서 &amp;lsquo;DELETE FAILED&amp;rsquo;상태표시를 나타내는 몇개의 스택들을 클릭합니다. 귀하께서는 삭제실패된 원인과 무엇이 실패되었는지를 보실 수 있습니다.</description>
+    </item>
+    
+    <item>
+      <title>사진을 검색할 수 있게 만들기</title>
+      <link>https://awskrug.github.io/amplify-photo-gallery-workshop/110_ai/20_prep_for_searching.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://awskrug.github.io/amplify-photo-gallery-workshop/110_ai/20_prep_for_searching.html</guid>
+      <description>GraphQL 스키마 갱신하기 이제 각 사진의 레이블을 저장할 수 있으니, AppSync API를 통해 이 데이터를 노출할 준비가 되었습니다.
+DynamoDB 쿼리로 검색하는 방법도 가능하지만, Amazon Elasticsearch Service를 사용하여 데이터를 색인하고 검색 쿼리를 다루는 방식이 좀 더 유연하고 효율적입니다. 다행이 Amplify CLI는 매우 쉽게 Amazon Elasticsearch 엔드포인트를 생성하고 앱 데이터와 연결합니다.
+ photo-albums/amplify/backend/api/photoalbums/schema.graphql 을 다음 내용으로 변경합니다. # amplify/backend/api/photo-albums/schema.graphql type Album @model @auth(rules: [{allow: owner}]) { id: ID! name: String! photos: [Photo] @connection(name: &amp;#34;AlbumPhotos&amp;#34;) } type Photo @model @auth(rules: [{allow: owner}]) @searchable {  id: ID!</description>
     </item>
     
     <item>
@@ -234,14 +235,14 @@ Let&amp;rsquo;s create a new S3ImageUpload component that will contain an HTML f
     </item>
     
     <item>
-      <title>Searching Photos By Label</title>
+      <title>사진을 레이블로 검색하기</title>
       <link>https://awskrug.github.io/amplify-photo-gallery-workshop/110_ai/40_searching_for_labels.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://awskrug.github.io/amplify-photo-gallery-workshop/110_ai/40_searching_for_labels.html</guid>
-      <description>With all of the back-end work completed, now we just need to update our web app to allow searching for photos by label.
-Let&amp;rsquo;s create a new Search component and add it to the App component to be rendered on the root path. For rendering all of the matching photos in the Search component, we&amp;rsquo;ll re-use the PhotosList component we already created.
-Replace photo-albums/src/App.js with the following: // photo-albums/src/App.js  import React, { Component } from &amp;#39;react&amp;#39;; import {BrowserRouter as Router, Route, NavLink} from &amp;#39;react-router-dom&amp;#39;; import { Divider, Form, Grid, Header, Input, List, Segment } from &amp;#39;semantic-ui-react&amp;#39;; import {v4 as uuid} from &amp;#39;uuid&amp;#39;; import { Connect, S3Image, withAuthenticator } from &amp;#39;aws-amplify-react&amp;#39;; import Amplify, { API, graphqlOperation, Storage } from &amp;#39;aws-amplify&amp;#39;; import aws_exports from &amp;#39;.</description>
+      <description>백엔드 작업이 완료되었으니 이제 사진을 레이블로 검색할 수 있게 하겠습니다.
+새 Search 컴포넌트를 생성하고 App 컴포넌트에 루트 경로로 표시되도록 추가합니다. Search 컴포넌트에서 검색된 모든 사진을 표시하기위해 이미 생성한 PhotoList 컴포넌트를 재사용합니다.
+photo-albums/src/App.js을 다음 내용으로 변경합니다. // photo-albums/src/App.js  import React, { Component } from &amp;#39;react&amp;#39;; import {BrowserRouter as Router, Route, NavLink} from &amp;#39;react-router-dom&amp;#39;; import { Divider, Form, Grid, Header, Input, List, Segment } from &amp;#39;semantic-ui-react&amp;#39;; import {v4 as uuid} from &amp;#39;uuid&amp;#39;; import { Connect, S3Image, withAuthenticator } from &amp;#39;aws-amplify-react&amp;#39;; import Amplify, { API, graphqlOperation, Storage } from &amp;#39;aws-amplify&amp;#39;; import aws_exports from &amp;#39;.</description>
     </item>
     
     <item>
