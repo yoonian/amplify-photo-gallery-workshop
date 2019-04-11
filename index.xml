@@ -22,13 +22,13 @@ AWS 계정에 대한 관리자 권한이 있는 IAM user : 워크샵에서 사�
     </item>
     
     <item>
-      <title>Managing Albums</title>
+      <title>앨범 관리</title>
       <link>https://awskrug.github.io/amplify-photo-gallery-workshop/50_working_with_albums/5_managing_albums.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://awskrug.github.io/amplify-photo-gallery-workshop/50_working_with_albums/5_managing_albums.html</guid>
-      <description>At this point, we have a web app that authenticates users and a secure GraphQL API endpoint that lets us create and read Album data. It&amp;rsquo;s time to connect the two together!
-As we saw above, [AWS Amplify](https://aws.github.io/aws-amplify/) is an open source JavaScript library that makes it very easy to integrate a number of cloud services into your web or React Native apps. We&#39;ll start by using its [Connect React component](https://aws-amplify.</description>
+      <description>이 시점에서 사용자를 인증하는 웹 앱과 앨범 데이터를 만들고 읽을 수있는 안전한 GraphQL API 엔드 포인트가 있습니다. 이제 둘을 연결하는 시간입니다!
+위에서 보았 듯이 [AWS Amplify] (https://aws.github.io/aws-amplify/)는 웹 또는 React Native 앱에 다수의 클라우드 서비스를 통합하기가 쉬운 오픈 소스 JavaScript 라이브러리입니다. 먼저 [Connect React 구성 요소] (https://aws-amplify.github.io/docs/js/api#connect)를 사용하여 GraphQL API를 자동으로 쿼리하고 React 구성 요소에 대한 데이터를 제공합니다. 렌더링 할 때 사용합니다.  Amplify CLI는 이미 *src/aws-exports.js* 파일에 AppSync API와 통신하기 위해 Amplify JS 라이브러리에 전달해야하는 모든 구성이 포함되어 있는지 확인했습니다.</description>
     </item>
     
     <item>
