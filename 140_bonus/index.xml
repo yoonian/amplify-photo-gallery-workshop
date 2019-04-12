@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Bonus Content on Amplify / AppSync / React Workshop</title>
+    <title>보너스 컨텐츠 on Amplify / AppSync / React Workshop</title>
     <link>https://awskrug.github.io/amplify-photo-gallery-workshop/140_bonus.html</link>
-    <description>Recent content in Bonus Content on Amplify / AppSync / React Workshop</description>
+    <description>Recent content in 보너스 컨텐츠 on Amplify / AppSync / React Workshop</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-kr</language>
     
@@ -11,24 +11,24 @@
     
     
     <item>
-      <title>Making a Lightbox for Viewing Fullsize Photos</title>
+      <title>LIGHTBOX 만들어 전체 크기의 사진들 보기</title>
       <link>https://awskrug.github.io/amplify-photo-gallery-workshop/140_bonus/10_lightbox_photos.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://awskrug.github.io/amplify-photo-gallery-workshop/140_bonus/10_lightbox_photos.html</guid>
-      <description>One thing we haven&amp;rsquo;t yet addressed in our app is adding the ability for users to click on a photo thumbnail to see a larger version of the photo. Since we already have the fullsize and the thumbnail data available to query from our API, all we need to do is update our front end application with a few more lines of code.
-Updating the front end Replace photo-albums/src/App.js with the following updated version: // photo-albums/src/App.</description>
+      <description>아직 우리는 유저가 앱에서 썸네일을 클릭하여 더 큰 사진을 볼 수 있도록 하는 기능을 다루지 않았습니다. 이미 우리는 API로부터 전체 크기와 썸네일 크기의 데이터 모두를 가지고 올 수 있기 때문에, 프런트엔드 앱에 몇줄 정도 코드를 추가하는 것 만으로도 이 기능을 제공할 수 있습니다.
+프런트엔드 수정하기 아래의 수정된 버전으로 photo-albums/src/App.js를 대체 해 주세요: // photo-albums/src/App.js  import React, { Component } from &amp;#39;react&amp;#39;; import {BrowserRouter as Router, Route, NavLink} from &amp;#39;react-router-dom&amp;#39;; import { Container, Divider, Form, Grid, Header, Input, List, Modal, Segment } from &amp;#39;semantic-ui-react&amp;#39;; import {v4 as uuid} from &amp;#39;uuid&amp;#39;; import { Connect, S3Image, withAuthenticator } from &amp;#39;aws-amplify-react&amp;#39;; import Amplify, { API, graphqlOperation, Storage } from &amp;#39;aws-amplify&amp;#39;; import aws_exports from &amp;#39;.</description>
     </item>
     
     <item>
-      <title>Allowing Other Users To Collaborate In Albums</title>
+      <title>다른 유저와 앨범 공유하기</title>
       <link>https://awskrug.github.io/amplify-photo-gallery-workshop/140_bonus/20_album_membership.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://awskrug.github.io/amplify-photo-gallery-workshop/140_bonus/20_album_membership.html</guid>
-      <description>We can take advantage of the fact that multiple users can sign in to our app and add the ability for other people view and upload to our albums on a case-by-case basis.
-The simplest way to do this is to have each album contain a set of usernames that are allowed to view and upload photos to it. Let&amp;rsquo;s see how we can make this work.
-Updating the backend Amplify supports multiple authorization declarations on the @model types in our GraphQL Schema.</description>
+      <description>다수의 유저가 우리의 애플리케이션으로 접속할 수 있다는 장점을 이용하여 다른 유저들이 상황에 따라 우리의 앨범을 보고 업로드 할 수 있는 기능을 넣을 수 있습니다.
+가장 쉬운 방법은 각각의 앨범에 유저들의 이름(usernames)을 포함하여 그들이 이 앨범 보고 새로운 사진을 업로드할 수 있도록 하는 것입니다.
+백엔드 수정하기 Amplify는 GraphQL 스키마 안의 @model 타입에서 여러 개의 권한 선언을 지원합니다. 우리는 두 번째 권한 규칙을 추가함으로서 Album의 members 필드에 있는 유저가 해당 레코드를 볼 수 있게 할 수 있습니다.</description>
     </item>
     
   </channel>

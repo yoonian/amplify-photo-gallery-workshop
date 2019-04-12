@@ -62,23 +62,13 @@ The Cloud9의 작업영역은 AWS root 계정이 아닌, Administrator 권한�
     </item>
     
     <item>
-      <title>Creating a Photo Processor Lambda function</title>
-      <link>https://awskrug.github.io/amplify-photo-gallery-workshop/70_generating_thumbnails/10_creating_a_photo_processor_lambda.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://awskrug.github.io/amplify-photo-gallery-workshop/70_generating_thumbnails/10_creating_a_photo_processor_lambda.html</guid>
-      <description>Let&amp;rsquo;s make a photo processor lambda function so that we can resize our photos.
-When following the instructions below, **you must name your lambda function _workshopphotoprocessor_**.   Later, we&#39;ll edit some CloudFormation templates, and the function name **workshopphotoprocessor** is hard coded to make it easier for this workshop (less edits that you&#39;ll have to do).   From the photo-albums directory, run: amplify function add and respond to the prompts the same way as shown below.</description>
-    </item>
-    
-    <item>
-      <title>Making a Lightbox for Viewing Fullsize Photos</title>
+      <title>LIGHTBOX 만들어 전체 크기의 사진들 보기</title>
       <link>https://awskrug.github.io/amplify-photo-gallery-workshop/140_bonus/10_lightbox_photos.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://awskrug.github.io/amplify-photo-gallery-workshop/140_bonus/10_lightbox_photos.html</guid>
-      <description>One thing we haven&amp;rsquo;t yet addressed in our app is adding the ability for users to click on a photo thumbnail to see a larger version of the photo. Since we already have the fullsize and the thumbnail data available to query from our API, all we need to do is update our front end application with a few more lines of code.
-Updating the front end Replace photo-albums/src/App.js with the following updated version: // photo-albums/src/App.</description>
+      <description>아직 우리는 유저가 앱에서 썸네일을 클릭하여 더 큰 사진을 볼 수 있도록 하는 기능을 다루지 않았습니다. 이미 우리는 API로부터 전체 크기와 썸네일 크기의 데이터 모두를 가지고 올 수 있기 때문에, 프런트엔드 앱에 몇줄 정도 코드를 추가하는 것 만으로도 이 기능을 제공할 수 있습니다.
+프런트엔드 수정하기 아래의 수정된 버전으로 photo-albums/src/App.js를 대체 해 주세요: // photo-albums/src/App.js  import React, { Component } from &amp;#39;react&amp;#39;; import {BrowserRouter as Router, Route, NavLink} from &amp;#39;react-router-dom&amp;#39;; import { Container, Divider, Form, Grid, Header, Input, List, Modal, Segment } from &amp;#39;semantic-ui-react&amp;#39;; import {v4 as uuid} from &amp;#39;uuid&amp;#39;; import { Connect, S3Image, withAuthenticator } from &amp;#39;aws-amplify-react&amp;#39;; import Amplify, { API, graphqlOperation, Storage } from &amp;#39;aws-amplify&amp;#39;; import aws_exports from &amp;#39;.</description>
     </item>
     
     <item>
@@ -106,6 +96,17 @@ AWS Amplify CLI는 리엑트와 리엑트 네이티브용 iOS와 안드로이드
     </item>
     
     <item>
+      <title>사진을 처리하는 람다 함수 만들기</title>
+      <link>https://awskrug.github.io/amplify-photo-gallery-workshop/70_generating_thumbnails/10_creating_a_photo_processor_lambda.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://awskrug.github.io/amplify-photo-gallery-workshop/70_generating_thumbnails/10_creating_a_photo_processor_lambda.html</guid>
+      <description>사진 처리 람다 함수를 만들어서 사진을 리사이즈 할 수 있게 합니다.
+아래 지시를 따를 때에 **람다 함수명을 반드시 _workshopphotoprocessor_ 으로 합니다**.   이후에 몇가지 클라우드 포메이션 템플릿을 수정하고, 이름이 **workshopphotoprocessor**인 함수는 이번 워크샵을 위해 하드 코딩합니다(꼭 수정할 부분을 줄이기 위해)   photo-albums 디렉토리에서 amplify function add를 실행해서 아래 보여진 것과 비슷한 방식으로 프롬프트에 답합니다. 두번째 단계를 계속하기 전에 엔터를 꼭 눌러야 합니다.
+$ amplify function add Using service: Lambda, provided by: awscloudformation ?</description>
+    </item>
+    
+    <item>
       <title>축하드립니다!</title>
       <link>https://awskrug.github.io/amplify-photo-gallery-workshop/130_wrapping_up/10_what_we_built.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -123,27 +124,6 @@ AWS Amplify CLI는 리엑트와 리엑트 네이티브용 iOS와 안드로이드
     </item>
     
     <item>
-      <title>Allowing Other Users To Collaborate In Albums</title>
-      <link>https://awskrug.github.io/amplify-photo-gallery-workshop/140_bonus/20_album_membership.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://awskrug.github.io/amplify-photo-gallery-workshop/140_bonus/20_album_membership.html</guid>
-      <description>We can take advantage of the fact that multiple users can sign in to our app and add the ability for other people view and upload to our albums on a case-by-case basis.
-The simplest way to do this is to have each album contain a set of usernames that are allowed to view and upload photos to it. Let&amp;rsquo;s see how we can make this work.
-Updating the backend Amplify supports multiple authorization declarations on the @model types in our GraphQL Schema.</description>
-    </item>
-    
-    <item>
-      <title>Connecting the photos bucket to the processor function</title>
-      <link>https://awskrug.github.io/amplify-photo-gallery-workshop/70_generating_thumbnails/20_connecting_the_lambda_to_the_bucket.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://awskrug.github.io/amplify-photo-gallery-workshop/70_generating_thumbnails/20_connecting_the_lambda_to_the_bucket.html</guid>
-      <description>Triggering the function when new photos are uploaded to the S3 bucket Now that we&amp;rsquo;ve created our Photo Processor function, we need to set up a trigger for it to run. Since we want to process every photo that gets uploaded to an album, we&amp;rsquo;ll make these changes by updating the configuration of the S3 userfiles bucket that Amplify created for us.
- Replace photo-albums/amplify/backend/storage/photoalbumsstorage/s3-cloudformation-template.json with the following: { &amp;#34;AWSTemplateFormatVersion&amp;#34;: &amp;#34;2010-09-09&amp;#34;, &amp;#34;Description&amp;#34;: &amp;#34;S3 resource stack creation using Amplify CLI&amp;#34;, &amp;#34;Parameters&amp;#34;: { &amp;#34;bucketName&amp;#34;: { &amp;#34;Type&amp;#34;: &amp;#34;String&amp;#34; }, &amp;#34;authPolicyName&amp;#34;: { &amp;#34;Type&amp;#34;: &amp;#34;String&amp;#34; }, &amp;#34;unauthPolicyName&amp;#34;: { &amp;#34;Type&amp;#34;: &amp;#34;String&amp;#34; }, &amp;#34;authRoleName&amp;#34;: { &amp;#34;Type&amp;#34;: &amp;#34;String&amp;#34; }, &amp;#34;unauthRoleName&amp;#34;: { &amp;#34;Type&amp;#34;: &amp;#34;String&amp;#34; }, &amp;#34;unauthPermissions&amp;#34;: { &amp;#34;Type&amp;#34;: &amp;#34;String&amp;#34; }, &amp;#34;authPermissions&amp;#34;: { &amp;#34;Type&amp;#34;: &amp;#34;String&amp;#34; }, &amp;#34;env&amp;#34;: { &amp;#34;Type&amp;#34;: &amp;#34;String&amp;#34; }  }, &amp;#34;Conditions&amp;#34;: { &amp;#34;ShouldNotCreateEnvResources&amp;#34;: { &amp;#34;Fn::Equals&amp;#34;: [ { &amp;#34;Ref&amp;#34;: &amp;#34;env&amp;#34; }, &amp;#34;NONE&amp;#34; ] }, &amp;#34;EnableUnauthReadWrite&amp;#34;: { &amp;#34;Fn::Equals&amp;#34;: [ { &amp;#34;Ref&amp;#34;: &amp;#34;unauthPermissions&amp;#34; }, &amp;#34;rw&amp;#34; ] }, &amp;#34;EnableUnauthRead&amp;#34;: { &amp;#34;Fn::Equals&amp;#34;: [ { &amp;#34;Ref&amp;#34;: &amp;#34;unauthPermissions&amp;#34; }, &amp;#34;r&amp;#34; ] }, &amp;#34;EnableUnauthWrite&amp;#34;: { &amp;#34;Fn::Equals&amp;#34;: [ { &amp;#34;Ref&amp;#34;: &amp;#34;unauthPermissions&amp;#34; }, &amp;#34;w&amp;#34; ] }, &amp;#34;EnableAuthReadWrite&amp;#34;: { &amp;#34;Fn::Equals&amp;#34;: [ { &amp;#34;Ref&amp;#34;: &amp;#34;authPermissions&amp;#34; }, &amp;#34;rw&amp;#34; ] }, &amp;#34;EnableAuthRead&amp;#34;: { &amp;#34;Fn::Equals&amp;#34;: [ { &amp;#34;Ref&amp;#34;: &amp;#34;authPermissions&amp;#34; }, &amp;#34;r&amp;#34; ] }, &amp;#34;EnableAuthWrite&amp;#34;: { &amp;#34;Fn::Equals&amp;#34;: [ { &amp;#34;Ref&amp;#34;: &amp;#34;authPermissions&amp;#34; }, &amp;#34;w&amp;#34; ] } }, &amp;#34;Resources&amp;#34;: { &amp;#34;InvokePhotoProcessorLambda&amp;#34;: { &amp;#34;Type&amp;#34; : &amp;#34;AWS::Lambda::Permission&amp;#34;, &amp;#34;Properties&amp;#34; : { &amp;#34;Action&amp;#34; : &amp;#34;lambda:InvokeFunction&amp;#34;, &amp;#34;FunctionName&amp;#34; : &amp;#34;workshopphotoprocessor&amp;#34;, &amp;#34;Principal&amp;#34; : &amp;#34;s3.</description>
-    </item>
-    
-    <item>
       <title>Querie 수행하기</title>
       <link>https://awskrug.github.io/amplify-photo-gallery-workshop/40_graphql/20_trying_out_queries.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -158,6 +138,17 @@ AWS AppSync의 대화형 쿼리 실행 영역인 이곳에서 쿼리를 작성�
     </item>
     
     <item>
+      <title>다른 유저와 앨범 공유하기</title>
+      <link>https://awskrug.github.io/amplify-photo-gallery-workshop/140_bonus/20_album_membership.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://awskrug.github.io/amplify-photo-gallery-workshop/140_bonus/20_album_membership.html</guid>
+      <description>다수의 유저가 우리의 애플리케이션으로 접속할 수 있다는 장점을 이용하여 다른 유저들이 상황에 따라 우리의 앨범을 보고 업로드 할 수 있는 기능을 넣을 수 있습니다.
+가장 쉬운 방법은 각각의 앨범에 유저들의 이름(usernames)을 포함하여 그들이 이 앨범 보고 새로운 사진을 업로드할 수 있도록 하는 것입니다.
+백엔드 수정하기 Amplify는 GraphQL 스키마 안의 @model 타입에서 여러 개의 권한 선언을 지원합니다. 우리는 두 번째 권한 규칙을 추가함으로서 Album의 members 필드에 있는 유저가 해당 레코드를 볼 수 있게 할 수 있습니다.</description>
+    </item>
+    
+    <item>
       <title>리소스 삭제하기</title>
       <link>https://awskrug.github.io/amplify-photo-gallery-workshop/130_wrapping_up/20_cleanup.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -167,6 +158,16 @@ AWS AppSync의 대화형 쿼리 실행 영역인 이곳에서 쿼리를 작성�
  photo-albums 디렉토리에서 amplify delete를 실행하고 삭제를 확인하기 위해 *Enter*키를 누릅니다.
  Amplify가 리소스들을 삭제하는 동안 기다립니다.
   수동으로 일부 삭제하기 이제 CloudFormation stacks console로 이동해서 &amp;lsquo;DELETE FAILED&amp;rsquo;상태표시를 나타내는 몇개의 스택들을 클릭합니다. 귀하께서는 삭제실패된 원인과 무엇이 실패되었는지를 보실 수 있습니다.</description>
+    </item>
+    
+    <item>
+      <title>사진 버킷을 처리함수와 연결하기</title>
+      <link>https://awskrug.github.io/amplify-photo-gallery-workshop/70_generating_thumbnails/20_connecting_the_lambda_to_the_bucket.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://awskrug.github.io/amplify-photo-gallery-workshop/70_generating_thumbnails/20_connecting_the_lambda_to_the_bucket.html</guid>
+      <description>새 사진이 S3 버킷에 업로드된 후에 함수 동작시키기 사진 처리 함수를 만들었으니 이제는 함수를 실행하는 트리거를 설정해야합니다. 앨범에 업로드된 모든 사진을 처리해야 하기 때문에, Amplify로 생성한 S3 사용자 파일 버킷의 구성을 수정하여 이러한 변경 작업을 수행합니다.
+ photo-albums/amplify/backend/storage/photoalbumsstorage/s3-cloudformation-template.json 파일을 다음 내용으로 변경해주십시요. { &amp;#34;AWSTemplateFormatVersion&amp;#34;: &amp;#34;2010-09-09&amp;#34;, &amp;#34;Description&amp;#34;: &amp;#34;S3 resource stack creation using Amplify CLI&amp;#34;, &amp;#34;Parameters&amp;#34;: { &amp;#34;bucketName&amp;#34;: { &amp;#34;Type&amp;#34;: &amp;#34;String&amp;#34; }, &amp;#34;authPolicyName&amp;#34;: { &amp;#34;Type&amp;#34;: &amp;#34;String&amp;#34; }, &amp;#34;unauthPolicyName&amp;#34;: { &amp;#34;Type&amp;#34;: &amp;#34;String&amp;#34; }, &amp;#34;authRoleName&amp;#34;: { &amp;#34;Type&amp;#34;: &amp;#34;String&amp;#34; }, &amp;#34;unauthRoleName&amp;#34;: { &amp;#34;Type&amp;#34;: &amp;#34;String&amp;#34; }, &amp;#34;unauthPermissions&amp;#34;: { &amp;#34;Type&amp;#34;: &amp;#34;String&amp;#34; }, &amp;#34;authPermissions&amp;#34;: { &amp;#34;Type&amp;#34;: &amp;#34;String&amp;#34; }, &amp;#34;env&amp;#34;: { &amp;#34;Type&amp;#34;: &amp;#34;String&amp;#34; }  }, &amp;#34;Conditions&amp;#34;: { &amp;#34;ShouldNotCreateEnvResources&amp;#34;: { &amp;#34;Fn::Equals&amp;#34;: [ { &amp;#34;Ref&amp;#34;: &amp;#34;env&amp;#34; }, &amp;#34;NONE&amp;#34; ] }, &amp;#34;EnableUnauthReadWrite&amp;#34;: { &amp;#34;Fn::Equals&amp;#34;: [ { &amp;#34;Ref&amp;#34;: &amp;#34;unauthPermissions&amp;#34; }, &amp;#34;rw&amp;#34; ] }, &amp;#34;EnableUnauthRead&amp;#34;: { &amp;#34;Fn::Equals&amp;#34;: [ { &amp;#34;Ref&amp;#34;: &amp;#34;unauthPermissions&amp;#34; }, &amp;#34;r&amp;#34; ] }, &amp;#34;EnableUnauthWrite&amp;#34;: { &amp;#34;Fn::Equals&amp;#34;: [ { &amp;#34;Ref&amp;#34;: &amp;#34;unauthPermissions&amp;#34; }, &amp;#34;w&amp;#34; ] }, &amp;#34;EnableAuthReadWrite&amp;#34;: { &amp;#34;Fn::Equals&amp;#34;: [ { &amp;#34;Ref&amp;#34;: &amp;#34;authPermissions&amp;#34; }, &amp;#34;rw&amp;#34; ] }, &amp;#34;EnableAuthRead&amp;#34;: { &amp;#34;Fn::Equals&amp;#34;: [ { &amp;#34;Ref&amp;#34;: &amp;#34;authPermissions&amp;#34; }, &amp;#34;r&amp;#34; ] }, &amp;#34;EnableAuthWrite&amp;#34;: { &amp;#34;Fn::Equals&amp;#34;: [ { &amp;#34;Ref&amp;#34;: &amp;#34;authPermissions&amp;#34; }, &amp;#34;w&amp;#34; ] } }, &amp;#34;Resources&amp;#34;: { &amp;#34;InvokePhotoProcessorLambda&amp;#34;: { &amp;#34;Type&amp;#34; : &amp;#34;AWS::Lambda::Permission&amp;#34;, &amp;#34;Properties&amp;#34; : { &amp;#34;Action&amp;#34; : &amp;#34;lambda:InvokeFunction&amp;#34;, &amp;#34;FunctionName&amp;#34; : &amp;#34;workshopphotoprocessor&amp;#34;, &amp;#34;Principal&amp;#34; : &amp;#34;s3.</description>
     </item>
     
     <item>
